@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		65F10D3A1FA285920067E039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F10D391FA285920067E039 /* AppDelegate.swift */; };
-		65F10D3C1FA285920067E039 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F10D3B1FA285920067E039 /* ViewController.swift */; };
+		65F10D3C1FA285920067E039 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F10D3B1FA285920067E039 /* ProfileViewController.swift */; };
 		65F10D3F1FA285920067E039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F10D3D1FA285920067E039 /* Main.storyboard */; };
 		65F10D411FA285920067E039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F10D401FA285920067E039 /* Assets.xcassets */; };
 		65F10D441FA285920067E039 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F10D421FA285920067E039 /* LaunchScreen.storyboard */; };
+		65F10D511FA291120067E039 /* ProfileBackgroundHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F10D4E1FA291120067E039 /* ProfileBackgroundHeader.swift */; };
+		65F10D521FA291120067E039 /* ProfileBackgroundHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F10D4F1FA291120067E039 /* ProfileBackgroundHeader.xib */; };
+		65F10D531FA291120067E039 /* ProfileBackgroundBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F10D501FA291120067E039 /* ProfileBackgroundBlurView.swift */; };
 		69507E411FE0636FF24C24F3 /* Pods_Parnella_Profile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A2E86BE4998AE39F69BBB0F /* Pods_Parnella_Profile.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,11 +24,14 @@
 		65E8632560585073983F746B /* Pods-Parnella Profile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parnella Profile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Parnella Profile/Pods-Parnella Profile.debug.xcconfig"; sourceTree = "<group>"; };
 		65F10D361FA285920067E039 /* Parnella Profile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Parnella Profile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F10D391FA285920067E039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		65F10D3B1FA285920067E039 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		65F10D3B1FA285920067E039 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		65F10D3E1FA285920067E039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		65F10D401FA285920067E039 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65F10D431FA285920067E039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		65F10D451FA285920067E039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65F10D4E1FA291120067E039 /* ProfileBackgroundHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileBackgroundHeader.swift; sourceTree = "<group>"; };
+		65F10D4F1FA291120067E039 /* ProfileBackgroundHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileBackgroundHeader.xib; sourceTree = "<group>"; };
+		65F10D501FA291120067E039 /* ProfileBackgroundBlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileBackgroundBlurView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,13 +77,40 @@
 			isa = PBXGroup;
 			children = (
 				65F10D391FA285920067E039 /* AppDelegate.swift */,
-				65F10D3B1FA285920067E039 /* ViewController.swift */,
-				65F10D3D1FA285920067E039 /* Main.storyboard */,
+				65F10D4C1FA290C20067E039 /* Storyboards */,
+				65F10D4B1FA28EFD0067E039 /* View Controllers */,
+				65F10D4D1FA290DA0067E039 /* Views */,
 				65F10D401FA285920067E039 /* Assets.xcassets */,
-				65F10D421FA285920067E039 /* LaunchScreen.storyboard */,
 				65F10D451FA285920067E039 /* Info.plist */,
 			);
 			path = "Parnella Profile";
+			sourceTree = "<group>";
+		};
+		65F10D4B1FA28EFD0067E039 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				65F10D3B1FA285920067E039 /* ProfileViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		65F10D4C1FA290C20067E039 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				65F10D3D1FA285920067E039 /* Main.storyboard */,
+				65F10D421FA285920067E039 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		65F10D4D1FA290DA0067E039 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				65F10D501FA291120067E039 /* ProfileBackgroundBlurView.swift */,
+				65F10D4E1FA291120067E039 /* ProfileBackgroundHeader.swift */,
+				65F10D4F1FA291120067E039 /* ProfileBackgroundHeader.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A472CC897527179D7E6592CB /* Frameworks */ = {
@@ -152,6 +185,7 @@
 			files = (
 				65F10D441FA285920067E039 /* LaunchScreen.storyboard in Resources */,
 				65F10D411FA285920067E039 /* Assets.xcassets in Resources */,
+				65F10D521FA291120067E039 /* ProfileBackgroundHeader.xib in Resources */,
 				65F10D3F1FA285920067E039 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,8 +245,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F10D3C1FA285920067E039 /* ViewController.swift in Sources */,
+				65F10D3C1FA285920067E039 /* ProfileViewController.swift in Sources */,
+				65F10D511FA291120067E039 /* ProfileBackgroundHeader.swift in Sources */,
 				65F10D3A1FA285920067E039 /* AppDelegate.swift in Sources */,
+				65F10D531FA291120067E039 /* ProfileBackgroundBlurView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +389,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 47E7H74WZ5;
 				INFOPLIST_FILE = "Parnella Profile/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.demo.Parnella-Profile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -369,6 +406,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 47E7H74WZ5;
 				INFOPLIST_FILE = "Parnella Profile/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.demo.Parnella-Profile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
