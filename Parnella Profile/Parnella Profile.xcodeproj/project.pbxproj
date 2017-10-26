@@ -1,0 +1,404 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		65F10D3A1FA285920067E039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F10D391FA285920067E039 /* AppDelegate.swift */; };
+		65F10D3C1FA285920067E039 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F10D3B1FA285920067E039 /* ViewController.swift */; };
+		65F10D3F1FA285920067E039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F10D3D1FA285920067E039 /* Main.storyboard */; };
+		65F10D411FA285920067E039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F10D401FA285920067E039 /* Assets.xcassets */; };
+		65F10D441FA285920067E039 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F10D421FA285920067E039 /* LaunchScreen.storyboard */; };
+		69507E411FE0636FF24C24F3 /* Pods_Parnella_Profile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A2E86BE4998AE39F69BBB0F /* Pods_Parnella_Profile.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		24CE977894C8737CDEFA766C /* Pods-Parnella Profile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parnella Profile.release.xcconfig"; path = "Pods/Target Support Files/Pods-Parnella Profile/Pods-Parnella Profile.release.xcconfig"; sourceTree = "<group>"; };
+		2A2E86BE4998AE39F69BBB0F /* Pods_Parnella_Profile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parnella_Profile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		65E8632560585073983F746B /* Pods-Parnella Profile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parnella Profile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Parnella Profile/Pods-Parnella Profile.debug.xcconfig"; sourceTree = "<group>"; };
+		65F10D361FA285920067E039 /* Parnella Profile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Parnella Profile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		65F10D391FA285920067E039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		65F10D3B1FA285920067E039 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		65F10D3E1FA285920067E039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		65F10D401FA285920067E039 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		65F10D431FA285920067E039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		65F10D451FA285920067E039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		65F10D331FA285920067E039 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69507E411FE0636FF24C24F3 /* Pods_Parnella_Profile.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		453B5FCC1CF63996D300AE1A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				65E8632560585073983F746B /* Pods-Parnella Profile.debug.xcconfig */,
+				24CE977894C8737CDEFA766C /* Pods-Parnella Profile.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		65F10D2D1FA285920067E039 = {
+			isa = PBXGroup;
+			children = (
+				65F10D381FA285920067E039 /* Parnella Profile */,
+				65F10D371FA285920067E039 /* Products */,
+				453B5FCC1CF63996D300AE1A /* Pods */,
+				A472CC897527179D7E6592CB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		65F10D371FA285920067E039 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				65F10D361FA285920067E039 /* Parnella Profile.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		65F10D381FA285920067E039 /* Parnella Profile */ = {
+			isa = PBXGroup;
+			children = (
+				65F10D391FA285920067E039 /* AppDelegate.swift */,
+				65F10D3B1FA285920067E039 /* ViewController.swift */,
+				65F10D3D1FA285920067E039 /* Main.storyboard */,
+				65F10D401FA285920067E039 /* Assets.xcassets */,
+				65F10D421FA285920067E039 /* LaunchScreen.storyboard */,
+				65F10D451FA285920067E039 /* Info.plist */,
+			);
+			path = "Parnella Profile";
+			sourceTree = "<group>";
+		};
+		A472CC897527179D7E6592CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A2E86BE4998AE39F69BBB0F /* Pods_Parnella_Profile.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		65F10D351FA285920067E039 /* Parnella Profile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65F10D481FA285920067E039 /* Build configuration list for PBXNativeTarget "Parnella Profile" */;
+			buildPhases = (
+				CF4497C82AD9B381B77337E0 /* [CP] Check Pods Manifest.lock */,
+				65F10D321FA285920067E039 /* Sources */,
+				65F10D331FA285920067E039 /* Frameworks */,
+				65F10D341FA285920067E039 /* Resources */,
+				B936B8AB24B965285582F75A /* [CP] Embed Pods Frameworks */,
+				6B499611F93C1EF847DCAF82 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Parnella Profile";
+			productName = "Parnella Profile";
+			productReference = 65F10D361FA285920067E039 /* Parnella Profile.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		65F10D2E1FA285920067E039 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Daniel Parnella";
+				TargetAttributes = {
+					65F10D351FA285920067E039 = {
+						CreatedOnToolsVersion = 9.0.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 65F10D311FA285920067E039 /* Build configuration list for PBXProject "Parnella Profile" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 65F10D2D1FA285920067E039;
+			productRefGroup = 65F10D371FA285920067E039 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				65F10D351FA285920067E039 /* Parnella Profile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		65F10D341FA285920067E039 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65F10D441FA285920067E039 /* LaunchScreen.storyboard in Resources */,
+				65F10D411FA285920067E039 /* Assets.xcassets in Resources */,
+				65F10D3F1FA285920067E039 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6B499611F93C1EF847DCAF82 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Parnella Profile/Pods-Parnella Profile-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B936B8AB24B965285582F75A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Parnella Profile/Pods-Parnella Profile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF4497C82AD9B381B77337E0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		65F10D321FA285920067E039 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65F10D3C1FA285920067E039 /* ViewController.swift in Sources */,
+				65F10D3A1FA285920067E039 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		65F10D3D1FA285920067E039 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65F10D3E1FA285920067E039 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		65F10D421FA285920067E039 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65F10D431FA285920067E039 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		65F10D461FA285920067E039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		65F10D471FA285920067E039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		65F10D491FA285920067E039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 65E8632560585073983F746B /* Pods-Parnella Profile.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 47E7H74WZ5;
+				INFOPLIST_FILE = "Parnella Profile/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.demo.Parnella-Profile";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		65F10D4A1FA285920067E039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24CE977894C8737CDEFA766C /* Pods-Parnella Profile.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 47E7H74WZ5;
+				INFOPLIST_FILE = "Parnella Profile/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.demo.Parnella-Profile";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		65F10D311FA285920067E039 /* Build configuration list for PBXProject "Parnella Profile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65F10D461FA285920067E039 /* Debug */,
+				65F10D471FA285920067E039 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65F10D481FA285920067E039 /* Build configuration list for PBXNativeTarget "Parnella Profile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65F10D491FA285920067E039 /* Debug */,
+				65F10D4A1FA285920067E039 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 65F10D2E1FA285920067E039 /* Project object */;
+}

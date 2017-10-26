@@ -1,0 +1,6 @@
+framework module Pods_Parnella_Profile {
+  umbrella header "Pods-Parnella Profile-umbrella.h"
+
+  export *
+  module * { export * }
+}
