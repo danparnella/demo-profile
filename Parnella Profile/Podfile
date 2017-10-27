@@ -8,4 +8,5 @@ target 'Parnella Profile' do
   # Pods for Parnella Profile
   pod 'IGListKit', '~> 3.0'
   pod 'Reusable'
+  pod 'Nuke', '~> 5.0'
 end

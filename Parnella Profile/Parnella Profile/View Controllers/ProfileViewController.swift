@@ -23,22 +23,12 @@ final class ProfileViewController: UIViewController {
         return adapter
     }()
     
-    var profileModel: ProfileVM!
-    
-    init(othersProfile: Friend? = nil, isBlogger: Bool = false) {
-        super.init(nibName: ProfileViewController.reuseIdentifier, bundle: nil)
-        if !isBlogger {
-            self.profileModel = ProfileVM(othersProfile: othersProfile)
-            self.profileModel.delegate = self
-        }
-    }
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+    var dataModel: ProfileDataModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.removeBackButtonTitle()
+        self.dataModel = ProfileDataModel()
+        self.dataModel.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,14 +58,17 @@ extension ProfileViewController {
         
         if #available(iOS 11.0, *) {
         } else {
-            self.collectionViewTopConstraint.constant = NAV_HEADER_HEIGHT
+            self.collectionViewTopConstraint.constant = self.navHeaderHeight()
         }
-        //        self.collectionView.contentInset.top = backgroundHeight - NAV_HEADER_HEIGHT
-        self.collectionView.scrollIndicatorInsets.top = backgroundHeight - NAV_HEADER_HEIGHT
+        self.collectionView.scrollIndicatorInsets.top = backgroundHeight - self.navHeaderHeight()
     }
     
     func setupBlurView() {
         self.backgroundPhotoView.imageBlurView = ProfileBackgroundBlurView(profileBackgroundView: self.backgroundPhotoView)
+    }
+    
+    func navHeaderHeight() -> CGFloat {
+        return UIApplication.shared.statusBarFrame.height + 44
     }
 }
 
@@ -83,30 +76,26 @@ extension ProfileViewController {
 extension ProfileViewController: ListAdapterDataSource {
     func updateMainAdapter() {
         self.adapter.performUpdates(animated: true) { (finished) in
-            self.updateThreshold()
+//            self.updateThreshold()
         }
     }
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return self.profileModel.getData().filter({ !($0 is ListsDataModel) })
+        return self.dataModel.getData()
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-        switch object {
-        case is ProfileVMProfileData:
+        if object is ProfileDetailsData {
             let sectionController = ProfileInfoSectionController()
-            sectionController.backgroundImageHeight = self.backgroundPhotoViewHeightConstraint.constant - NAV_HEADER_HEIGHT
-            sectionController.ownProfile = (self.profileModel.profileType == .own)
+            sectionController.backgroundImageHeight = self.backgroundPhotoViewHeightConstraint.constant - self.navHeaderHeight()
             return sectionController
-        //        case is ListsDataModel:
-        case is ItemsListSection:
-            let sectionController = ListsTodosSectionController()
-            self.profileModel.todosDataVM.paginationDelegate = sectionController
-            
-            return sectionController
-        default:
-            return ListSectionController()
+        } else if object is ItemsData {
+//            let sectionController = ListsTodosSectionController()
+//            self.dataModel.todosDataVM.paginationDelegate = sectionController
+//
+//            return sectionController
         }
+        return ListSectionController()
     }
     
     func emptyView(for listAdapter: ListAdapter) -> UIView? { return nil }
@@ -115,17 +104,17 @@ extension ProfileViewController: ListAdapterDataSource {
 //MARK: SCROLL
 extension ProfileViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        var offset = self.collectionView.contentOffset.y - (self.view.frame.width/2 - NAV_HEADER_HEIGHT)
+        var offset = self.collectionView.contentOffset.y - (self.view.frame.width/2 - self.navHeaderHeight())
         self.updateFrames(offset)
         
-        self.profileModel.checkThreshold(offset)
+//        self.dataModel.checkThreshold(offset)
         
-        offset += (self.view.frame.width/2 - NAV_HEADER_HEIGHT)
+        offset += (self.view.frame.width/2 - self.navHeaderHeight())
         self.scrubAnimations(offset)
     }
     
     func updateFrames(_ offset: CGFloat) {
-        self.backgroundPhotoViewHeightConstraint.constant = (offset <= 0) ? -(offset - NAV_HEADER_HEIGHT) : NAV_HEADER_HEIGHT
+        self.backgroundPhotoViewHeightConstraint.constant = (offset <= 0) ? -(offset - self.navHeaderHeight()) : self.navHeaderHeight()
         self.collectionView.scrollIndicatorInsets.top = (offset <= 0) ? -offset : 0
         self.view.layoutSubviews()
     }
@@ -135,22 +124,25 @@ extension ProfileViewController: UIScrollViewDelegate {
         self.backgroundPhotoView.scrubChangePhotoAlpha(scrollViewOffset: offset)
     }
     
-    func updateThreshold() {
-        self.profileModel.threshold += (self.collectionView.contentSize.height - self.profileModel.threshold) * 0.6
-    }
+//    func updateThreshold() {
+//        self.dataModel.threshold += (self.collectionView.contentSize.height - self.dataModel.threshold) * 0.6
+//    }
 }
 
 //MARK: DELEGATE
-extension ProfileViewController: ProfileVMLoadDataDelegate {
-    func loadData() {
-        if let profileDetails = self.profileModel.profileVCDataModel.profileDetails {
-            if let url = URL(string: profileDetails.backgroundURL) {
-                NetworkImageManager.shared().commonManager.loadImage(with: url, into: self.backgroundPhotoView.imageView)
-            } else {
-                self.backgroundPhotoView.imageView.image = #imageLiteral(resourceName: "ProfileDefaultBackground")
-            }
-        }
-        
+extension ProfileViewController: ProfileDataModelDelegate {
+    func dataUpdated() {
         self.updateMainAdapter()
     }
+//    func loadData() {
+//        if let profileDetails = self.dataModel.profileVCDataModel.profileDetails {
+//            if let url = URL(string: profileDetails.backgroundURL) {
+//                NetworkImageManager.shared().commonManager.loadImage(with: url, into: self.backgroundPhotoView.imageView)
+//            } else {
+//                self.backgroundPhotoView.imageView.image = #imageLiteral(resourceName: "ProfileDefaultBackground")
+//            }
+//        }
+//
+//        self.updateMainAdapter()
+//    }
 }
