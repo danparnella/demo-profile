@@ -33,6 +33,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.hideNavigationBarBkgd()
         self.backgroundPhotoView.imageBlurView?.restartAnimator()
     }
     
@@ -55,11 +56,6 @@ extension ProfileViewController {
     func setupLayouts() {
         let backgroundHeight = self.view.frame.width/2
         self.backgroundPhotoViewHeightConstraint.constant = backgroundHeight
-        
-        if #available(iOS 11.0, *) {
-        } else {
-            self.collectionViewTopConstraint.constant = self.navHeaderHeight()
-        }
         self.collectionView.scrollIndicatorInsets.top = backgroundHeight - self.navHeaderHeight()
     }
     
@@ -81,7 +77,7 @@ extension ProfileViewController: ListAdapterDataSource {
     }
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return self.dataModel.getData()
+        return self.dataModel.getData().filter({ $0 is ProfileDetailsData })
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
@@ -132,7 +128,9 @@ extension ProfileViewController: UIScrollViewDelegate {
 //MARK: DELEGATE
 extension ProfileViewController: ProfileDataModelDelegate {
     func dataUpdated() {
-        self.updateMainAdapter()
+        DispatchQueue.main.async {
+            self.updateMainAdapter()
+        }
     }
 //    func loadData() {
 //        if let profileDetails = self.dataModel.profileVCDataModel.profileDetails {

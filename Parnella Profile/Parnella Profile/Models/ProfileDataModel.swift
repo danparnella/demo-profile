@@ -36,13 +36,7 @@ final class ProfileDataModel {
     
     init() {
         self.profileData = [self.profileDetails, self.items]
-        
-        self.profileDetails = ProfileDetailsData()
-        if let ownProfile = self.profileDetails?.ownProfile {
-            self.ownProfile = ownProfile
-            let source: ItemsData.ItemSource = (ownProfile) ? .yours : .others
-            self.items = ItemsData(source: source)
-        }
+        _ = ProfileDetailsData(delegate: self)
     }
     
     private func updateDataInSection(_ section: DataSection, data: ListDiffable?) {
@@ -69,5 +63,18 @@ final class ProfileDataModel {
         }
         
         return data
+    }
+}
+
+//MARK: Delegate
+extension ProfileDataModel: ProfileDetailsDataDelegate {
+    func detailsLoaded(data: ProfileDetailsData) {
+        self.profileDetails = data
+        
+        if let ownProfile = self.profileDetails?.ownProfile {
+            self.ownProfile = ownProfile
+            let source: ItemsData.ItemSource = (ownProfile) ? .yours : .others
+            self.items = ItemsData(source: source)
+        }
     }
 }

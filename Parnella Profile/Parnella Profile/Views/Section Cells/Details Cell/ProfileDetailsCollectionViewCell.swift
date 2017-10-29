@@ -38,9 +38,9 @@ class ProfileDetailsCollectionViewCell: UICollectionViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.locationIcon.changeImageColor(to: VivaneerColors.darkGreyTextColor())
-        self.birthdayIcon.changeImageColor(to: VivaneerColors.darkGreyTextColor())
-        self.relationshipIcon.changeImageColor(to: VivaneerColors.a7a7a7Color())
+        self.locationIcon.changeImageColor(to: Colors().gray666)
+        self.birthdayIcon.changeImageColor(to: Colors().gray666)
+        self.relationshipIcon.changeImageColor(to: Colors().grayA7)
     }
     
     @IBAction func relationshipButtonTapped(_ sender: UIButton) {
@@ -53,13 +53,17 @@ extension ProfileDetailsCollectionViewCell {
     func setupCell(data: ProfileDetailsViewModel) {
         self.nameLabel.text = data.profileName
         
-        self.locationStackView.isHidden = data.location.isEmpty
-        self.birthdayStackView.isHidden = data.birthday.isEmpty
-        self.locationBirthdayStackView.isHidden = (data.location.isEmpty && data.birthday.isEmpty)
-        self.relationshipStackView.isHidden = (data.relationshipFriend == nil)
-        self.relationshipProfileButton.isHidden = (data.relationshipFriend == nil)
+        let locationPresent = (data.location != nil)
+        let birthdayPresent = (data.birthday != nil)
+        let relationshipPresent = (data.relationshipName != nil)
         
-        self.detailsStackView.isHidden = (self.locationBirthdayStackView.isHidden && self.relationshipStackView.isHidden)
+        self.locationStackView.isHidden = !locationPresent
+        self.birthdayStackView.isHidden = !birthdayPresent
+        self.locationBirthdayStackView.isHidden = (!locationPresent && !birthdayPresent)
+        self.relationshipStackView.isHidden = !relationshipPresent
+        self.relationshipProfileButton.isHidden = !relationshipPresent
+        
+        self.detailsStackView.isHidden = (!locationPresent && !birthdayPresent && !relationshipPresent)
         
         for stackView in self.allStackViews {
             if stackView.isHidden {
@@ -69,7 +73,7 @@ extension ProfileDetailsCollectionViewCell {
         
         self.locationLabel.text = data.location
         self.birthdayLabel.text = data.birthday
-        self.relationshipLabel.text = data.relationshipFriend?.fullName()
+        self.relationshipLabel.text = data.relationshipName
     }
 }
 

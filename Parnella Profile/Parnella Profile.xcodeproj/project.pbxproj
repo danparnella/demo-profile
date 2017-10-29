@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		6590F06E1FA37CF5007B4B5F /* ProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6590EDE61FA37CEF007B4B5F /* ProfileDataModel.swift */; };
+		6592B92E1FA4E9CF00D442C4 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6592B9291FA4E9CE00D442C4 /* Lato-Black.ttf */; };
+		6592B92F1FA4E9CF00D442C4 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6592B92A1FA4E9CE00D442C4 /* Lato-Bold.ttf */; };
+		6592B9301FA4E9CF00D442C4 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6592B92B1FA4E9CF00D442C4 /* Lato-Italic.ttf */; };
+		6592B9311FA4E9CF00D442C4 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6592B92C1FA4E9CF00D442C4 /* Lato-Light.ttf */; };
+		6592B9321FA4E9CF00D442C4 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6592B92D1FA4E9CF00D442C4 /* Lato-Regular.ttf */; };
 		659873501FA37DFC00AE2AB2 /* ProfileFriendingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6598734D1FA37DFB00AE2AB2 /* ProfileFriendingViewModel.swift */; };
 		659873511FA37DFC00AE2AB2 /* ProfileDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6598734E1FA37DFC00AE2AB2 /* ProfileDetailsViewModel.swift */; };
 		659873521FA37DFC00AE2AB2 /* ProfilePhotoLineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6598734F1FA37DFC00AE2AB2 /* ProfilePhotoLineViewModel.swift */; };
@@ -21,7 +26,7 @@
 		659873691FA3A49200AE2AB2 /* ProfilePhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659873671FA3A49200AE2AB2 /* ProfilePhotoCollectionViewCell.swift */; };
 		6598736A1FA3A49200AE2AB2 /* ProfilePhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 659873681FA3A49200AE2AB2 /* ProfilePhotoCollectionViewCell.xib */; };
 		659873741FA3A71600AE2AB2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659873731FA3A71600AE2AB2 /* Colors.swift */; };
-		659873781FA3AC1500AE2AB2 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659873771FA3AC1500AE2AB2 /* UIViewExtensions.swift */; };
+		659873781FA3AC1500AE2AB2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659873771FA3AC1500AE2AB2 /* Extensions.swift */; };
 		65F10D3A1FA285920067E039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F10D391FA285920067E039 /* AppDelegate.swift */; };
 		65F10D3C1FA285920067E039 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F10D3B1FA285920067E039 /* ProfileViewController.swift */; };
 		65F10D3F1FA285920067E039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F10D3D1FA285920067E039 /* Main.storyboard */; };
@@ -38,6 +43,11 @@
 		24CE977894C8737CDEFA766C /* Pods-Parnella Profile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parnella Profile.release.xcconfig"; path = "Pods/Target Support Files/Pods-Parnella Profile/Pods-Parnella Profile.release.xcconfig"; sourceTree = "<group>"; };
 		2A2E86BE4998AE39F69BBB0F /* Pods_Parnella_Profile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parnella_Profile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6590EDE61FA37CEF007B4B5F /* ProfileDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDataModel.swift; sourceTree = "<group>"; };
+		6592B9291FA4E9CE00D442C4 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		6592B92A1FA4E9CE00D442C4 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		6592B92B1FA4E9CF00D442C4 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
+		6592B92C1FA4E9CF00D442C4 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		6592B92D1FA4E9CF00D442C4 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		6598734D1FA37DFB00AE2AB2 /* ProfileFriendingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFriendingViewModel.swift; sourceTree = "<group>"; };
 		6598734E1FA37DFC00AE2AB2 /* ProfileDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDetailsViewModel.swift; sourceTree = "<group>"; };
 		6598734F1FA37DFC00AE2AB2 /* ProfilePhotoLineViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoLineViewModel.swift; sourceTree = "<group>"; };
@@ -52,7 +62,7 @@
 		659873671FA3A49200AE2AB2 /* ProfilePhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		659873681FA3A49200AE2AB2 /* ProfilePhotoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilePhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		659873731FA3A71600AE2AB2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		659873771FA3AC1500AE2AB2 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		659873771FA3AC1500AE2AB2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		65E8632560585073983F746B /* Pods-Parnella Profile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parnella Profile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Parnella Profile/Pods-Parnella Profile.debug.xcconfig"; sourceTree = "<group>"; };
 		65F10D361FA285920067E039 /* Parnella Profile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Parnella Profile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F10D391FA285920067E039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +96,18 @@
 				24CE977894C8737CDEFA766C /* Pods-Parnella Profile.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6592B9281FA4E96900D442C4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6592B9291FA4E9CE00D442C4 /* Lato-Black.ttf */,
+				6592B92A1FA4E9CE00D442C4 /* Lato-Bold.ttf */,
+				6592B92B1FA4E9CF00D442C4 /* Lato-Italic.ttf */,
+				6592B92C1FA4E9CF00D442C4 /* Lato-Light.ttf */,
+				6592B92D1FA4E9CF00D442C4 /* Lato-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		659873531FA37E0A00AE2AB2 /* Profile Info Section */ = {
@@ -166,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				659873711FA3A6F900AE2AB2 /* Colors */,
+				6592B9281FA4E96900D442C4 /* Fonts */,
 				659873721FA3A70300AE2AB2 /* Images */,
 			);
 			path = Assets;
@@ -190,17 +213,9 @@
 		659873751FA3ABE700AE2AB2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				659873761FA3ABF700AE2AB2 /* UIView */,
+				659873771FA3AC1500AE2AB2 /* Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		659873761FA3ABF700AE2AB2 /* UIView */ = {
-			isa = PBXGroup;
-			children = (
-				659873771FA3AC1500AE2AB2 /* UIViewExtensions.swift */,
-			);
-			path = UIView;
 			sourceTree = "<group>";
 		};
 		65F10D2D1FA285920067E039 = {
@@ -362,12 +377,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6592B9301FA4E9CF00D442C4 /* Lato-Italic.ttf in Resources */,
 				65F10D441FA285920067E039 /* LaunchScreen.storyboard in Resources */,
 				65F10D411FA285920067E039 /* Assets.xcassets in Resources */,
+				6592B9311FA4E9CF00D442C4 /* Lato-Light.ttf in Resources */,
 				65F10D521FA291120067E039 /* ProfileBackgroundHeader.xib in Resources */,
 				659873621FA3A47F00AE2AB2 /* ProfileFriendButtonCollectionViewCell.xib in Resources */,
+				6592B92E1FA4E9CF00D442C4 /* Lato-Black.ttf in Resources */,
+				6592B9321FA4E9CF00D442C4 /* Lato-Regular.ttf in Resources */,
 				65F10D3F1FA285920067E039 /* Main.storyboard in Resources */,
 				6598736A1FA3A49200AE2AB2 /* ProfilePhotoCollectionViewCell.xib in Resources */,
+				6592B92F1FA4E9CF00D442C4 /* Lato-Bold.ttf in Resources */,
 				659873651FA3A48A00AE2AB2 /* ProfileDetailsCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,7 +461,7 @@
 				6590F06E1FA37CF5007B4B5F /* ProfileDataModel.swift in Sources */,
 				65F10D511FA291120067E039 /* ProfileBackgroundHeader.swift in Sources */,
 				65F10D3A1FA285920067E039 /* AppDelegate.swift in Sources */,
-				659873781FA3AC1500AE2AB2 /* UIViewExtensions.swift in Sources */,
+				659873781FA3AC1500AE2AB2 /* Extensions.swift in Sources */,
 				659873691FA3A49200AE2AB2 /* ProfilePhotoCollectionViewCell.swift in Sources */,
 				65F10D531FA291120067E039 /* ProfileBackgroundBlurView.swift in Sources */,
 			);
@@ -517,7 +537,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -568,7 +588,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

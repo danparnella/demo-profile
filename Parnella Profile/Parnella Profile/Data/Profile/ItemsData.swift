@@ -30,7 +30,7 @@ final class ItemsData: ListDiffable {
     func getRandomItemData() {
         let timeStamp = String(describing: Date().timeIntervalSince1970)
         let stringToConvert = "\(timeStamp)8106d4f20bb85aa99ebf0d8d26721409a7b3fe6d1ef56758b1bca5e8c20487af3e11a458"
-        guard let url = URL(string: "http://gateway.marvel.com/v1/public/characters?ts=\(timeStamp)&apikey=1ef56758b1bca5e8c20487af3e11a458&hash=\(self.apiHash(stringToConvert))") else {
+        guard let url = URL(string: "https://gateway.marvel.com/v1/public/characters?ts=\(timeStamp)&apikey=1ef56758b1bca5e8c20487af3e11a458&hash=\(self.apiHash(stringToConvert))") else {
             print("URL broke :(")
             return
         }
@@ -39,7 +39,7 @@ final class ItemsData: ListDiffable {
             if let data = data {
                 do {
                     let response = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(response)
+//                    print(response)
                 } catch let error as NSError {
                     print(error)
                 }

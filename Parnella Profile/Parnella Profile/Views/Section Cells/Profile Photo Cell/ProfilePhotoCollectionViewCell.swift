@@ -30,6 +30,7 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var changePhotoView: UIView!
+    @IBOutlet weak var changePhotoIcon: UIImageView!
     @IBOutlet weak var changeProfilePhotoButton: UIButton!
     
     @IBOutlet weak var changeBkgdPhotoButton: UIButton!
@@ -37,6 +38,11 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var backgroundPhotoButtonVerticalSpacingConstraint: NSLayoutConstraint!
     
     weak var delegate: ProfilePhotoCellDelegate?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.changePhotoIcon.changeImageColor(to: Colors().white)
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
