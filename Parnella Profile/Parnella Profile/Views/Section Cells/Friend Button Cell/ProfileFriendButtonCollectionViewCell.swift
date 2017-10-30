@@ -36,7 +36,7 @@ class ProfileFriendButtonCollectionViewCell: UICollectionViewCell, NibReusable {
     }
 }
 
-//MARK: CELL SETUP
+// MARK: Cell Setup
 extension ProfileFriendButtonCollectionViewCell {
     func setupCell(data: ProfileFriendingViewModel) {
         self.addFriendMessageLabel.text = self.addFriendMessageLabel.text?.replacingOccurrences(of: "*blank*", with: data.friendName)
@@ -52,7 +52,7 @@ extension ProfileFriendButtonCollectionViewCell {
     }
 }
 
-//MARK: LIST BINDING
+// MARK: List Binding
 extension ProfileFriendButtonCollectionViewCell: ListBindable {
     func bindViewModel(_ viewModel: Any) {
         guard let viewModel = viewModel as? ProfileFriendingViewModel else { return }

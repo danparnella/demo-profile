@@ -10,15 +10,20 @@ import UIKit
 import IGListKit
 
 final class ProfileDetailsViewModel: ListDiffable {
-    var profileName: String?
+    var fullName: String?
+    var firstName: String?
     var location: String?
     var birthday: String?
+    
+    var isFriend = false
     var relationshipName: String?
     
-    init(name: String?, location: String?, birthday: String?, relationshipName: String? = nil) {
-        self.profileName = name
+    init(fullName: String?, firstName: String?, location: String?, birthday: String?, isFriend: Bool, relationshipName: String? = nil) {
+        self.fullName = fullName
+        self.firstName = firstName
         self.location = location
         self.birthday = birthday
+        self.isFriend = isFriend
         self.relationshipName = relationshipName
     }
     
@@ -29,7 +34,7 @@ final class ProfileDetailsViewModel: ListDiffable {
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
         guard let object = object as? ProfileDetailsViewModel else { return false }
         
-        if self.profileName == object.profileName {
+        if self.fullName == object.fullName {
             if self.location == object.location {
                 if self.birthday == object.birthday {
                     return self.relationshipName == object.relationshipName

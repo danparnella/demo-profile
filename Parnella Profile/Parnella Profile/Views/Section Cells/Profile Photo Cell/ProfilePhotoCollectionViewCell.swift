@@ -25,6 +25,7 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var followingView: UIView!
     @IBOutlet weak var followingTallyLabel: UILabel!
     
+    @IBOutlet weak var photoViews: UIView!
     @IBOutlet weak var photoBorderView: UIView!
     @IBOutlet weak var photoContainerView: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -38,6 +39,7 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var backgroundPhotoButtonVerticalSpacingConstraint: NSLayoutConstraint!
     
     weak var delegate: ProfilePhotoCellDelegate?
+    var photoViewsYOrigin: CGFloat?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,6 +50,9 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
         super.layoutSubviews()
         self.photoBorderView.makeCircle()
         self.photoContainerView.makeCircle()
+        if self.photoViewsYOrigin == nil {
+            self.photoViewsYOrigin = self.photoViews.frame.origin.y
+        }
     }
 
     @IBAction func friendsButtonTapped(_ sender: UIButton) {
@@ -67,7 +72,7 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     }
 }
 
-//MARK: CELL SETUP
+// MARK: Cell Setup
 extension ProfilePhotoCollectionViewCell {
     func setupCell(data: ProfilePhotoLineViewModel) {
         self.friendsTallyLabel.text = data.numberOfFriends
@@ -88,10 +93,29 @@ extension ProfilePhotoCollectionViewCell {
     }
 }
 
-//MARK: LIST BINDING
+// MARK: List Binding
 extension ProfilePhotoCollectionViewCell: ListBindable {
     func bindViewModel(_ viewModel: Any) {
         guard let viewModel = viewModel as? ProfilePhotoLineViewModel else { return }
         self.setupCell(data: viewModel)
+    }
+}
+
+// MARK: Delegate
+extension ProfilePhotoCollectionViewCell: ProfileViewControllerDelegate {
+    func updateBasedOnScroll(_ offset: CGFloat) {
+        guard let originalYOrigin = self.photoViewsYOrigin else { return }
+        
+        if offset > 0 {
+            var scale = 1 - offset/350
+            scale = (scale <= 0) ? 0.1 : scale
+            self.photoViews.transform = CGAffineTransform(scaleX: scale, y: scale)
+            
+            let originOffset = offset/2.65
+            self.photoViews.frame.origin.y = originalYOrigin + originOffset
+        } else {
+            self.photoViews.transform = CGAffineTransform.identity
+            self.photoViews.frame.origin.y = originalYOrigin
+        }
     }
 }

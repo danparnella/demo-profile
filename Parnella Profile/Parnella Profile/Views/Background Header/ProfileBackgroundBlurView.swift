@@ -39,7 +39,7 @@ final class ProfileBackgroundBlurView: UIVisualEffectView {
     }
 }
 
-//MARK: OPERATIONAL FUNCS
+// MARK: Operational Funcs
 extension ProfileBackgroundBlurView {
     func setupAnimator() {
         self.animator = UIViewPropertyAnimator(duration: 1, curve: .easeInOut) {
@@ -84,7 +84,7 @@ extension ProfileBackgroundBlurView {
     }
 }
 
-//MARK: NOTIFICATIONS
+// MARK: Notifications
 extension ProfileBackgroundBlurView {
     func registerNotifications() {
         NotificationCenter.default.addObserver(

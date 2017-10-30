@@ -10,7 +10,8 @@ import Foundation
 import IGListKit
 
 protocol ProfileDataModelDelegate: class {
-    func dataUpdated()
+    func bkgdImageLoaded(_ urlString: String?)
+    func dataLoaded()
 }
 
 final class ProfileDataModel {
@@ -34,9 +35,9 @@ final class ProfileDataModel {
     
     var profileData: [ListDiffable?]
     
-    init() {
+    init(ownProfile: Bool) {
         self.profileData = [self.profileDetails, self.items]
-        _ = ProfileDetailsData(delegate: self)
+        _ = ProfileDetailsData(delegate: self, ownProfile: ownProfile)
     }
     
     private func updateDataInSection(_ section: DataSection, data: ListDiffable?) {
@@ -44,7 +45,7 @@ final class ProfileDataModel {
         let newData = data
         self.profileData[index] = newData
         
-        self.delegate?.dataUpdated()
+        self.delegate?.dataLoaded()
     }
     
     func removeDataForSection(_ section: DataSection) {
@@ -66,8 +67,12 @@ final class ProfileDataModel {
     }
 }
 
-//MARK: Delegate
+// MARK: Delegate
 extension ProfileDataModel: ProfileDetailsDataDelegate {
+    func backgroundImageLoaded(urlString: String?) {
+        self.delegate?.bkgdImageLoaded(urlString)
+    }
+    
     func detailsLoaded(data: ProfileDetailsData) {
         self.profileDetails = data
         

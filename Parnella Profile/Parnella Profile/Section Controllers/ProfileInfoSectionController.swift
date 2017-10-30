@@ -36,14 +36,16 @@ extension ProfileInfoSectionController: ListBindingSectionControllerDataSource {
                 profileImageURLString: data.profileImageURLString
             ),
             ProfileDetailsViewModel(
-                name: data.fullName,
+                fullName: data.fullName,
+                firstName: data.firstName,
                 location: data.location,
                 birthday: data.birthday,
+                isFriend: data.isFriend,
                 relationshipName: data.relationshipName
             )
         ]
         
-        if !data.ownProfile, let firstName = data.firstName {
+        if !data.ownProfile && !data.isFriend, let firstName = data.firstName {
             let friendViewModel = ProfileFriendingViewModel(friendName: firstName, requestSent: data.requestSent, awaitingResponse: data.awaitingResponse)
             viewModels.append(friendViewModel)
         }
@@ -63,7 +65,11 @@ extension ProfileInfoSectionController: ListBindingSectionControllerDataSource {
                 if data.location != nil || data.birthday != nil {
                     height += 22
                 }
-                if data.relationshipName != nil {
+                if data.ownProfile {
+                    if data.relationshipName != nil {
+                        height += 28
+                    }
+                } else if data.isFriend {
                     height += 28
                 }
                 return height
@@ -98,6 +104,12 @@ extension ProfileInfoSectionController: ListBindingSectionControllerDataSource {
             cell.backgroundPhotoButtonHeightConstraint.constant = self.backgroundImageHeight
             cell.backgroundPhotoButtonVerticalSpacingConstraint.constant = -self.backgroundImageHeight * (5/13)
             cell.layoutIfNeeded()
+            
+            if let viewController = self.viewController as? ProfileViewController {
+                viewController.delegate = cell
+            }
+        } else if let cell = cell as? ProfileDetailsCollectionViewCell {
+            cell.ownProfile = self.updateData?.ownProfile ?? false
         }
         
         return cell

@@ -36,7 +36,7 @@ final class ProfileBackgroundHeader: UIView, NibReusable {
     func scrubChangePhotoAlpha(scrollViewOffset offset: CGFloat) {
         if offset <= 0 {
             self.changePhotoView.alpha = 1 + offset/75
-        } else if offset > 0 {
+        } else {
             self.changePhotoView.alpha = 1 - offset/30
         }
     }

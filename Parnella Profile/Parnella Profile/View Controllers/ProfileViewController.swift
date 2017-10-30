@@ -8,6 +8,11 @@
 
 import UIKit
 import IGListKit
+import Nuke
+
+protocol ProfileViewControllerDelegate: class {
+    func updateBasedOnScroll(_ offset: CGFloat)
+}
 
 final class ProfileViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -24,10 +29,18 @@ final class ProfileViewController: UIViewController {
     }()
     
     var dataModel: ProfileDataModel!
+    let ownProfile = randomBool()
+    weak var delegate: ProfileViewControllerDelegate?
+    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataModel = ProfileDataModel()
+        self.backgroundPhotoView.changePhotoView.isHidden = !self.ownProfile
+        
+        self.dataModel = ProfileDataModel(ownProfile: self.ownProfile)
         self.dataModel.delegate = self
     }
     
@@ -51,7 +64,7 @@ final class ProfileViewController: UIViewController {
     }
 }
 
-//MARK: INITIAL SETUP
+// MARK: Initial Setup
 extension ProfileViewController {
     func setupLayouts() {
         let backgroundHeight = self.view.frame.width/2
@@ -68,7 +81,7 @@ extension ProfileViewController {
     }
 }
 
-//MARK: LIST ADAPTER DATA
+// MARK: List Adapter Data
 extension ProfileViewController: ListAdapterDataSource {
     func updateMainAdapter() {
         self.adapter.performUpdates(animated: true) { (finished) in
@@ -97,16 +110,21 @@ extension ProfileViewController: ListAdapterDataSource {
     func emptyView(for listAdapter: ListAdapter) -> UIView? { return nil }
 }
 
-//MARK: SCROLL
+// MARK: Scroll
 extension ProfileViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        var offset = self.collectionView.contentOffset.y - (self.view.frame.width/2 - self.navHeaderHeight())
-        self.updateFrames(offset)
+        let backgroundMinusHeader = self.view.frame.width/2 - self.navHeaderHeight()
+        let offset = self.collectionView.contentOffset.y
+        let framesOffset = offset - backgroundMinusHeader
+        
+        self.updateFrames(framesOffset)
         
 //        self.dataModel.checkThreshold(offset)
         
-        offset += (self.view.frame.width/2 - self.navHeaderHeight())
         self.scrubAnimations(offset)
+        if offset <= backgroundMinusHeader {
+            self.delegate?.updateBasedOnScroll(offset)
+        }
     }
     
     func updateFrames(_ offset: CGFloat) {
@@ -125,13 +143,22 @@ extension ProfileViewController: UIScrollViewDelegate {
 //    }
 }
 
-//MARK: DELEGATE
+// MARK: Delegate
 extension ProfileViewController: ProfileDataModelDelegate {
-    func dataUpdated() {
+    func bkgdImageLoaded(_ urlString: String?) {
+        DispatchQueue.main.async {
+            if let url = URL(string: urlString ?? "") {
+                Nuke.loadImage(with: url, into: self.backgroundPhotoView.imageView)
+            }
+        }
+    }
+    
+    func dataLoaded() {
         DispatchQueue.main.async {
             self.updateMainAdapter()
         }
     }
+    
 //    func loadData() {
 //        if let profileDetails = self.dataModel.profileVCDataModel.profileDetails {
 //            if let url = URL(string: profileDetails.backgroundURL) {

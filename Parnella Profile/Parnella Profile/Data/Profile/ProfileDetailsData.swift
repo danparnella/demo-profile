@@ -10,7 +10,12 @@ import UIKit
 import IGListKit
 
 protocol ProfileDetailsDataDelegate: class {
+    func backgroundImageLoaded(urlString: String?)
     func detailsLoaded(data: ProfileDetailsData)
+}
+
+public func randomBool() -> Bool {
+    return (arc4random_uniform(2) == 0)
 }
 
 final class ProfileDetailsData: ListDiffable {
@@ -18,9 +23,11 @@ final class ProfileDetailsData: ListDiffable {
     let friendsCount: Int
     let followingCount: Int
 
+    var isFriend = false
     var requestSent = false
     var awaitingResponse = false
     
+    var backgroundImageURLString: String?
     var profileImageURLString: String?
     var firstName: String?
     var fullName: String?
@@ -32,23 +39,27 @@ final class ProfileDetailsData: ListDiffable {
     
     weak var delegate: ProfileDetailsDataDelegate?
     
-    init(delegate: ProfileDetailsDataDelegate) {
+    init(delegate: ProfileDetailsDataDelegate, ownProfile: Bool) {
         self.delegate = delegate
         
-        self.ownProfile = (arc4random_uniform(2) == 0)
+        self.ownProfile = ownProfile
         
         if !self.ownProfile {
-            self.requestSent = (arc4random_uniform(2) == 0)
-            if !self.requestSent {
-                self.awaitingResponse = (arc4random_uniform(2) == 0)
+            self.isFriend = randomBool()
+            if !self.isFriend {
+                self.requestSent = randomBool()
+                if !self.requestSent {
+                    self.awaitingResponse = randomBool()
+                }
             }
         }
         
         self.friendsCount = Int(arc4random_uniform(1001))
         self.followingCount = Int(arc4random_uniform(301))
 
-        self.inRelationship = (arc4random_uniform(2) == 0)
+        self.inRelationship = randomBool()
         
+        self.getBackgroundPhoto()
         self.getRandomUserData()
     }
     
@@ -61,8 +72,29 @@ final class ProfileDetailsData: ListDiffable {
     }
 }
 
-//MARK: Data Handling
+// MARK: Data Handling
 extension ProfileDetailsData {
+    func getBackgroundPhoto() {
+        guard let url = URL(string: "https://api.unsplash.com/photos/random?client_id=d2a3cc6fe413710d74b49502129e0b2f7423b12f0bc121a38776d14613d2959d") else {
+            print("URL is broken :(")
+            return
+        }
+        
+        let urlSession = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                do {
+                    let response = try JSONSerialization.jsonObject(with: data, options: [])
+                    self.processBackgroundImageData(response)
+                } catch let error as NSError {
+                    print(error)
+                }
+            } else if let error = error {
+                print(error)
+            }
+        }
+        urlSession.resume()
+    }
+    
     func getRandomUserData(forRelationship: Bool = false) {
         guard let url = URL(string: "https://randomuser.me/api/?nat=us") else {
             print("URL is broken :(")
@@ -95,6 +127,17 @@ extension ProfileDetailsData {
             }
         }
         return nil
+    }
+    
+    func processBackgroundImageData(_ data: Any) {
+        if let container = data as? [String: Any],
+            let urls = container["urls"] as? [String: String],
+            let smallSizePhoto = urls["small"]
+        {
+            self.backgroundImageURLString = smallSizePhoto
+        }
+        
+        self.delegate?.backgroundImageLoaded(urlString: self.backgroundImageURLString)
     }
     
     func processUserData(_ data: Any) {

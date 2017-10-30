@@ -32,21 +32,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="407" height="100"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oE3-1Q-rcN">
-                                <rect key="frame" x="0.0" y="10" width="407" height="82"/>
+                                <rect key="frame" x="16" y="10" width="375" height="82"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXa-YD-RIh">
-                                        <rect key="frame" x="123" y="0.0" width="161" height="33"/>
+                                        <rect key="frame" x="107" y="0.0" width="161" height="33"/>
                                         <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="28"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="vrL-rj-Ybi">
-                                        <rect key="frame" x="124.5" y="41" width="158" height="41"/>
+                                        <rect key="frame" x="108.5" y="41" width="158" height="41"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="lastBaseline" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TRh-tK-RxX">
                                                 <rect key="frame" x="0.0" y="0.0" width="158" height="13.5"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="lastBaseline" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hy4-mi-XMu">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" alignment="lastBaseline" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hy4-mi-XMu">
                                                         <rect key="frame" x="0.0" y="0.0" width="69.5" height="13.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_globe" translatesAutoresizingMaskIntoConstraints="NO" id="bRD-k6-77w">
@@ -57,7 +57,7 @@
                                                                     <constraint firstAttribute="height" priority="999" constant="10" id="wK9-Nc-aIj"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfB-n9-T0v">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZfB-n9-T0v">
                                                                 <rect key="frame" x="15" y="0.0" width="54.5" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="14"/>
                                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -65,7 +65,7 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="lastBaseline" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rzT-bf-CMu">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" alignment="lastBaseline" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rzT-bf-CMu">
                                                         <rect key="frame" x="89.5" y="0.0" width="68.5" height="13.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_present" translatesAutoresizingMaskIntoConstraints="NO" id="av4-JE-wng">
@@ -76,7 +76,7 @@
                                                                     <constraint firstAttribute="height" priority="999" constant="11" id="IX1-Eb-R8R"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-l0-cZ1">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Birthday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wz5-l0-cZ1">
                                                                 <rect key="frame" x="16" y="0.0" width="52.5" height="16.5"/>
                                                                 <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="14"/>
                                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -118,12 +118,12 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oE3-1Q-rcN" secondAttribute="bottom" id="FGK-Lx-tCa"/>
-                            <constraint firstItem="oE3-1Q-rcN" firstAttribute="leading" secondItem="Dak-gH-gbL" secondAttribute="leading" id="Ktq-Ws-qEG"/>
+                            <constraint firstItem="oE3-1Q-rcN" firstAttribute="leading" secondItem="Dak-gH-gbL" secondAttribute="leading" constant="16" id="Ktq-Ws-qEG"/>
                             <constraint firstItem="nTK-9N-FGU" firstAttribute="bottom" secondItem="ijc-jU-dVg" secondAttribute="bottom" priority="999" constant="10" id="XMb-qJ-r8D"/>
                             <constraint firstItem="nTK-9N-FGU" firstAttribute="top" secondItem="ijc-jU-dVg" secondAttribute="top" priority="999" constant="-10" id="ZeC-Hf-GY6"/>
                             <constraint firstItem="nTK-9N-FGU" firstAttribute="leading" secondItem="ijc-jU-dVg" secondAttribute="leading" priority="999" constant="-10" id="dif-eQ-6LP"/>
                             <constraint firstItem="oE3-1Q-rcN" firstAttribute="top" secondItem="Dak-gH-gbL" secondAttribute="top" constant="10" id="hX5-OP-EHn"/>
-                            <constraint firstAttribute="trailing" secondItem="oE3-1Q-rcN" secondAttribute="trailing" id="p4h-kc-EMK"/>
+                            <constraint firstAttribute="trailing" secondItem="oE3-1Q-rcN" secondAttribute="trailing" constant="16" id="p4h-kc-EMK"/>
                             <constraint firstItem="nTK-9N-FGU" firstAttribute="trailing" secondItem="ijc-jU-dVg" secondAttribute="trailing" priority="999" constant="10" id="zjg-rT-mOE"/>
                         </constraints>
                     </view>

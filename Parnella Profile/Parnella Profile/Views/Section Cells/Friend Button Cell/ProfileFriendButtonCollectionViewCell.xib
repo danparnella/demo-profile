@@ -54,35 +54,10 @@
                         </connections>
                     </button>
                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="fXh-BZ-Emc">
-                        <rect key="frame" x="9.5" y="28" width="386" height="40"/>
+                        <rect key="frame" x="16" y="28" width="373" height="40"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1T4-av-arZ">
-                                <rect key="frame" x="0.0" y="0.0" width="180" height="40"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="l9d-zA-ojR"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
-                                <state key="normal" title="Accept">
-                                    <color key="titleColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1.5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="friendButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="WJc-gf-l6u"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Qi-oc-wgN">
-                                <rect key="frame" x="206" y="0.0" width="180" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="173.5" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
                                 <state key="normal" title="Ignore">
@@ -103,13 +78,36 @@
                                     <action selector="ignoreButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="UbF-cr-XbH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1T4-av-arZ">
+                                <rect key="frame" x="199.5" y="0.0" width="173.5" height="40"/>
+                                <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="999" constant="180" id="l9d-zA-ojR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
+                                <state key="normal" title="Accept"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="friendButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="WJc-gf-l6u"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="IEO-8q-Uy4"/>
                         </constraints>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97g-94-WJ4">
-                        <rect key="frame" x="115.5" y="80" width="173.5" height="40"/>
+                        <rect key="frame" x="118.5" y="80" width="168" height="41"/>
                         <string key="text">Add *blank* as a friend
 to see their items</string>
                         <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
@@ -119,8 +117,10 @@ to see their items</string>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="fXh-BZ-Emc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="Bko-nd-heO"/>
                 <constraint firstItem="97g-94-WJ4" firstAttribute="top" secondItem="fXh-BZ-Emc" secondAttribute="bottom" constant="12" id="E2p-SB-gKq"/>
                 <constraint firstItem="97g-94-WJ4" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="FWL-df-Kgk"/>
+                <constraint firstAttribute="trailing" secondItem="fXh-BZ-Emc" secondAttribute="trailing" constant="16" id="WuH-hD-JPt"/>
                 <constraint firstItem="dZj-TS-VWS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="28" id="ZdO-1X-YGc"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="97g-94-WJ4" secondAttribute="trailing" id="bQK-rF-BN6"/>
                 <constraint firstItem="fXh-BZ-Emc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="28" id="hM2-M0-ndj"/>

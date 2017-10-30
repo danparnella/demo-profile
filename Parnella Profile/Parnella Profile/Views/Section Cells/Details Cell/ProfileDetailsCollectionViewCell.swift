@@ -35,6 +35,7 @@ class ProfileDetailsCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet var allStackViews: [UIStackView]!
     
     weak var delegate: ProfileDetailsCellDelegate?
+    var ownProfile = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,22 +49,22 @@ class ProfileDetailsCollectionViewCell: UICollectionViewCell, NibReusable {
     }
 }
 
-//MARK: CELL SETUP
+// MARK: Cell Setup
 extension ProfileDetailsCollectionViewCell {
     func setupCell(data: ProfileDetailsViewModel) {
-        self.nameLabel.text = data.profileName
+        self.nameLabel.text = data.fullName
         
         let locationPresent = (data.location != nil)
         let birthdayPresent = (data.birthday != nil)
         let relationshipPresent = (data.relationshipName != nil)
         
         self.locationStackView.isHidden = !locationPresent
-        self.birthdayStackView.isHidden = !birthdayPresent
-        self.locationBirthdayStackView.isHidden = (!locationPresent && !birthdayPresent)
-        self.relationshipStackView.isHidden = !relationshipPresent
-        self.relationshipProfileButton.isHidden = !relationshipPresent
+        self.birthdayStackView.isHidden = !birthdayPresent || (!self.ownProfile && !data.isFriend)
+        self.locationBirthdayStackView.isHidden = (!locationPresent && self.birthdayStackView.isHidden)
+        self.relationshipStackView.isHidden = ((self.ownProfile && !relationshipPresent) || (!self.ownProfile && !data.isFriend))
+        self.relationshipProfileButton.isHidden = self.relationshipStackView.isHidden
         
-        self.detailsStackView.isHidden = (!locationPresent && !birthdayPresent && !relationshipPresent)
+        self.detailsStackView.isHidden = (!locationPresent && self.birthdayStackView.isHidden && self.relationshipStackView.isHidden)
         
         for stackView in self.allStackViews {
             if stackView.isHidden {
@@ -73,11 +74,16 @@ extension ProfileDetailsCollectionViewCell {
         
         self.locationLabel.text = data.location
         self.birthdayLabel.text = data.birthday
-        self.relationshipLabel.text = data.relationshipName
+        if relationshipPresent {
+            self.relationshipIcon.changeImageColor(to: Colors().red)
+            self.relationshipLabel.text = data.relationshipName
+        } else if data.isFriend {
+            self.relationshipLabel.text = "Send a relationship request to \(data.firstName ?? "them")?"
+        }
     }
 }
 
-//MARK: LIST BINDING
+// MARK: List Binding
 extension ProfileDetailsCollectionViewCell: ListBindable {
     func bindViewModel(_ viewModel: Any) {
         guard let viewModel = viewModel as? ProfileDetailsViewModel else { return }
