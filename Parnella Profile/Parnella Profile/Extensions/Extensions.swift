@@ -68,6 +68,28 @@ extension UIView {
         view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         self.addSubview(view)
     }
+    
+    func addShadow(opacity: Float = 0.1, radius: CGFloat = 2) {
+        self.layer.rasterizationScale = UIScreen.main.scale
+        self.layer.shouldRasterize = true
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowOffset = CGSize.zero
+        self.layer.shadowRadius = radius
+    }
+    
+    func fadeTransition(_ duration: CFTimeInterval = 0.25, isEnabled: Bool = true) {
+        if isEnabled {
+            let animation:CATransition = CATransition()
+            animation.timingFunction = CAMediaTimingFunction(name:
+                kCAMediaTimingFunctionEaseInEaseOut)
+            animation.type = kCATransitionFade
+            animation.duration = duration
+            self.layer.add(animation, forKey: kCATransitionFade)
+        } else {
+            self.layer.removeAllAnimations()
+        }
+    }
 }
 
 extension String {
@@ -80,6 +102,11 @@ extension String {
         }
         return nil
     }
+    
+    func heightFromText(font: UIFont, width: CGFloat) -> CGFloat {
+        let rect = NSString(string: self).boundingRect(with: CGSize(width: width, height: CGFloat(MAXFLOAT)), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
+        return ceil(rect.height)
+    }
 }
 
 extension UIImageView {
@@ -87,4 +114,12 @@ extension UIImageView {
         image = image?.withRenderingMode(.alwaysTemplate)
         tintColor = color
     }
+}
+
+public func randomBool() -> Bool {
+    return (arc4random_uniform(2) == 0)
+}
+
+public func runAfterDelay(_ delay: Double, function: @escaping () -> Void){
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay, execute: function)
 }

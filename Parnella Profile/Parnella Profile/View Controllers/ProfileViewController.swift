@@ -90,7 +90,7 @@ extension ProfileViewController: ListAdapterDataSource {
     }
     
     func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-        return self.dataModel.getData().filter({ $0 is ProfileDetailsData })
+        return self.dataModel.getData()
     }
     
     func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
@@ -99,10 +99,10 @@ extension ProfileViewController: ListAdapterDataSource {
             sectionController.backgroundImageHeight = self.backgroundPhotoViewHeightConstraint.constant - self.navHeaderHeight()
             return sectionController
         } else if object is ItemsData {
-//            let sectionController = ListsTodosSectionController()
+            let sectionController = ItemsListSectionController()
 //            self.dataModel.todosDataVM.paginationDelegate = sectionController
-//
-//            return sectionController
+
+            return sectionController
         }
         return ListSectionController()
     }

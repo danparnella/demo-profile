@@ -67,7 +67,7 @@ final class ProfileDataModel {
     }
 }
 
-// MARK: Delegate
+// MARK: Delegates
 extension ProfileDataModel: ProfileDetailsDataDelegate {
     func backgroundImageLoaded(urlString: String?) {
         self.delegate?.bkgdImageLoaded(urlString)
@@ -79,7 +79,13 @@ extension ProfileDataModel: ProfileDetailsDataDelegate {
         if let ownProfile = self.profileDetails?.ownProfile {
             self.ownProfile = ownProfile
             let source: ItemsData.ItemSource = (ownProfile) ? .yours : .others
-            self.items = ItemsData(source: source)
+            _ = ItemsData(delegate: self, source: source, headerTitle: "Characters")
         }
+    }
+}
+
+extension ProfileDataModel: ItemsDataDelegate {
+    func itemsLoaded(data: ItemsData) {
+        self.items = data
     }
 }

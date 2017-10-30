@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Black.ttf">
+            <string>Lato-Black</string>
+        </array>
+        <array key="Lato-Bold.ttf">
+            <string>Lato-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" id="gTV-IL-0wX" customClass="HeaderCollectionViewCell" customModule="Parnella_Profile" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="385" height="53"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="385" height="53"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5MG-cV-hDu" userLabel="Content View">
+                        <rect key="frame" x="0.0" y="0.0" width="385" height="53"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="p6w-r7-46A">
+                                <rect key="frame" x="16" y="0.0" width="385" height="29"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Header Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEU-e1-3qT">
+                                        <rect key="frame" x="0.0" y="0.0" width="385" height="29"/>
+                                        <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4d-vd-svH">
+                                        <rect key="frame" x="0.0" y="0.0" width="385" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="Lato-Bold" family="Lato" pointSize="14"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="p6w-r7-46A" secondAttribute="trailing" constant="16" id="0db-pL-0HO"/>
+                            <constraint firstItem="p6w-r7-46A" firstAttribute="leading" secondItem="5MG-cV-hDu" secondAttribute="leading" constant="16" id="Qki-Vb-fHX"/>
+                            <constraint firstItem="p6w-r7-46A" firstAttribute="top" secondItem="5MG-cV-hDu" secondAttribute="top" id="iqb-Tu-hnP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="5MG-cV-hDu" secondAttribute="bottom" id="Chr-RX-ncr"/>
+                <constraint firstAttribute="trailing" secondItem="5MG-cV-hDu" secondAttribute="trailing" id="MM0-kK-sio"/>
+                <constraint firstItem="5MG-cV-hDu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Wvo-dA-cpE"/>
+                <constraint firstItem="5MG-cV-hDu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="c8H-mA-T6b"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="IvK-QT-x1r"/>
+            <size key="customSize" width="385" height="123"/>
+            <connections>
+                <outlet property="headerDescription" destination="N4d-vd-svH" id="VgD-C7-EfY"/>
+                <outlet property="headerTitleLabel" destination="VEU-e1-3qT" id="ekV-ua-G4r"/>
+            </connections>
+            <point key="canvasLocation" x="143.5" y="89.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

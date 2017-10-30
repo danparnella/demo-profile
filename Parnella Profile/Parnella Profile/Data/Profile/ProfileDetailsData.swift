@@ -14,10 +14,6 @@ protocol ProfileDetailsDataDelegate: class {
     func detailsLoaded(data: ProfileDetailsData)
 }
 
-public func randomBool() -> Bool {
-    return (arc4random_uniform(2) == 0)
-}
-
 final class ProfileDetailsData: ListDiffable {
     let ownProfile: Bool
     let friendsCount: Int

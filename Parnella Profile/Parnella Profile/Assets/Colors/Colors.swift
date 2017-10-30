@@ -34,6 +34,11 @@ final class Colors: UIColor {
             return UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1)
         }
     }
+    var gray999: UIColor {
+        get {
+            return UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 1)
+        }
+    }
     var grayA7: UIColor {
         get {
             return UIColor(red: 167/255, green: 167/255, blue: 167/255, alpha: 1)

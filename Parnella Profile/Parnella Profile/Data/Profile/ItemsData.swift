@@ -9,22 +9,26 @@
 import UIKit
 import IGListKit
 
+protocol ItemsDataDelegate: class {
+    func itemsLoaded(data: ItemsData)
+}
+
 final class ItemsData: ListDiffable {
     enum ItemSource {
         case yours, others
     }
     
     var source: ItemSource
-    var itemDataArray = [Any]()
     var items = [Item]()
+    var headerTitle: String?
     
-    init(source: ItemSource) {
+    weak var delegate: ItemsDataDelegate?
+    
+    init(delegate: ItemsDataDelegate, source: ItemSource, headerTitle: String?) {
+        self.delegate = delegate
         self.source = source
+        self.headerTitle = headerTitle
         self.getRandomItemData()
-        
-        for itemData in self.itemDataArray {
-            self.items.append(Item(data: itemData))
-        }
     }
     
     func getRandomItemData() {
@@ -39,7 +43,7 @@ final class ItemsData: ListDiffable {
             if let data = data {
                 do {
                     let response = try JSONSerialization.jsonObject(with: data, options: [])
-//                    print(response)
+                    self.createItems(data: response)
                 } catch let error as NSError {
                     print(error)
                 }
@@ -48,6 +52,25 @@ final class ItemsData: ListDiffable {
             }
         }
         urlSession.resume()
+    }
+    
+    func createItems(data: Any) {        
+        if let container = data as? [String: Any],
+            let characterDataContainer = container["data"] as? [String: Any],
+            let characterResults = characterDataContainer["results"] as? [[String: Any]]
+        {
+            for character in characterResults {
+                let nextItem = Item(data: character)
+                if source == .others {
+                    if let viewerState = Item.ItemState(rawValue: Int(arc4random_uniform(3))) {
+                        nextItem.viewerState = viewerState
+                    }
+                }
+                self.items.append(nextItem)
+            }
+            
+            self.delegate?.itemsLoaded(data: self)
+        }
     }
     
     func apiHash(_ string: String) -> String {
