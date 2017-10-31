@@ -15,6 +15,7 @@
 		657A546D1FA796E500BC4596 /* ContentContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657A546B1FA796E500BC4596 /* ContentContainerViewModel.swift */; };
 		657A546E1FA796E500BC4596 /* ContentHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657A546C1FA796E500BC4596 /* ContentHeaderViewModel.swift */; };
 		657A54701FA79F4000BC4596 /* ItemsSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657A546F1FA79F4000BC4596 /* ItemsSectionController.swift */; };
+		658DE8191FA8E13F004B4B58 /* ProfileItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658DE8181FA8E13F004B4B58 /* ProfileItemsViewModel.swift */; };
 		6590F06E1FA37CF5007B4B5F /* ProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6590EDE61FA37CEF007B4B5F /* ProfileDataModel.swift */; };
 		6592B92E1FA4E9CF00D442C4 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6592B9291FA4E9CE00D442C4 /* Lato-Black.ttf */; };
 		6592B92F1FA4E9CF00D442C4 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6592B92A1FA4E9CE00D442C4 /* Lato-Bold.ttf */; };
@@ -63,6 +64,7 @@
 		657A546B1FA796E500BC4596 /* ContentContainerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentContainerViewModel.swift; sourceTree = "<group>"; };
 		657A546C1FA796E500BC4596 /* ContentHeaderViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentHeaderViewModel.swift; sourceTree = "<group>"; };
 		657A546F1FA79F4000BC4596 /* ItemsSectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsSectionController.swift; sourceTree = "<group>"; };
+		658DE8181FA8E13F004B4B58 /* ProfileItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemsViewModel.swift; sourceTree = "<group>"; };
 		6590EDE61FA37CEF007B4B5F /* ProfileDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDataModel.swift; sourceTree = "<group>"; };
 		6592B9291FA4E9CE00D442C4 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		6592B92A1FA4E9CE00D442C4 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -124,6 +126,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6548E7851FA7E24D0060FC02 /* Hash */ = {
+			isa = PBXGroup;
+			children = (
+				6598735A1FA3960800AE2AB2 /* Parnella Profile-Bridging-Header.h */,
+			);
+			path = Hash;
+			sourceTree = "<group>";
+		};
 		657A545E1FA781B300BC4596 /* Profile Info */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +180,14 @@
 			path = "Generic Content Sections";
 			sourceTree = "<group>";
 		};
+		658DE8171FA8E11D004B4B58 /* Profile Items Section */ = {
+			isa = PBXGroup;
+			children = (
+				658DE8181FA8E13F004B4B58 /* ProfileItemsViewModel.swift */,
+			);
+			path = "Profile Items Section";
+			sourceTree = "<group>";
+		};
 		6592B9281FA4E96900D442C4 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,17 +216,9 @@
 			children = (
 				65AC249A1FA7A7600059DCE6 /* Calcs */,
 				6598736F1FA3A6D500AE2AB2 /* Profile */,
-				659873591FA395D100AE2AB2 /* Hash */,
+				6548E7851FA7E24D0060FC02 /* Hash */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		659873591FA395D100AE2AB2 /* Hash */ = {
-			isa = PBXGroup;
-			children = (
-				6598735A1FA3960800AE2AB2 /* Parnella Profile-Bridging-Header.h */,
-			);
-			path = Hash;
 			sourceTree = "<group>";
 		};
 		6598736B1FA3A4AB00AE2AB2 /* Profile Photo Cell */ = {
@@ -313,6 +323,7 @@
 			children = (
 				6590EDE61FA37CEF007B4B5F /* ProfileDataModel.swift */,
 				659873531FA37E0A00AE2AB2 /* Profile Info Section */,
+				658DE8171FA8E11D004B4B58 /* Profile Items Section */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -401,9 +412,9 @@
 		65F10D551FA2986D0067E039 /* Section Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				657A546F1FA79F4000BC4596 /* ItemsSectionController.swift */,
 				65F10D561FA298950067E039 /* ProfileInfoSectionController.swift */,
 				657A545C1FA780D400BC4596 /* ItemsListSectionController.swift */,
+				657A546F1FA79F4000BC4596 /* ItemsSectionController.swift */,
 			);
 			path = "Section Controllers";
 			sourceTree = "<group>";
@@ -566,6 +577,7 @@
 				659873521FA37DFC00AE2AB2 /* ProfilePhotoLineViewModel.swift in Sources */,
 				659873501FA37DFC00AE2AB2 /* ProfileFriendingViewModel.swift in Sources */,
 				65F10D3C1FA285920067E039 /* ProfileViewController.swift in Sources */,
+				658DE8191FA8E13F004B4B58 /* ProfileItemsViewModel.swift in Sources */,
 				6598735E1FA3972300AE2AB2 /* Item.swift in Sources */,
 				657A54691FA78FF900BC4596 /* LatoFont.swift in Sources */,
 				657A546E1FA796E500BC4596 /* ContentHeaderViewModel.swift in Sources */,

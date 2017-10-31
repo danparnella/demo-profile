@@ -19,9 +19,6 @@ final class ProfileDataModel {
         case profileDetails, items
     }
 
-    var ownProfile = false
-    weak var delegate: ProfileDataModelDelegate?
-
     var profileDetails: ProfileDetailsData? {
         willSet {
             self.updateDataInSection(.profileDetails, data: newValue)
@@ -33,7 +30,11 @@ final class ProfileDataModel {
         }
     }
     
+    var ownProfile = false
     var profileData: [ListDiffable?]
+    weak var delegate: ProfileDataModelDelegate?
+    
+    var threshold: CGFloat = 0
     
     init(ownProfile: Bool) {
         self.profileData = [self.profileDetails, self.items]
@@ -48,10 +49,18 @@ final class ProfileDataModel {
         self.delegate?.dataLoaded()
     }
     
-    func removeDataForSection(_ section: DataSection) {
+    func removeDataInSection(_ section: DataSection) {
         switch section {
         case .profileDetails: self.profileDetails = nil
         case .items: self.items = nil
+        }
+    }
+    
+    func checkThreshold(_ offset: CGFloat) {
+        guard let itemsData = self.items else { return }
+        
+        if offset >= self.threshold && !itemsData.gettingData {
+            itemsData.getRandomItemData(nextPage: true)
         }
     }
     
@@ -79,12 +88,12 @@ extension ProfileDataModel: ProfileDetailsDataDelegate {
         if let ownProfile = self.profileDetails?.ownProfile {
             self.ownProfile = ownProfile
             let source: ItemsData.ItemSource = (ownProfile) ? .yours : .others
-            _ = ItemsData(delegate: self, source: source, headerTitle: "Characters")
+            _ = ItemsData(loadDelegate: self, source: source, headerTitle: "Characters")
         }
     }
 }
 
-extension ProfileDataModel: ItemsDataDelegate {
+extension ProfileDataModel: ItemsInitialDataDelegate {
     func itemsLoaded(data: ItemsData) {
         self.items = data
     }

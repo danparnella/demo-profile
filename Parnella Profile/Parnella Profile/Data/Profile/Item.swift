@@ -28,6 +28,8 @@ final class Item: ListDiffable {
     
     var itemID: Int!
     
+    var skipItem = false
+    
     init(data: [String: Any]) {
         if let state = ItemState(rawValue: Int(arc4random_uniform(2))) {
             self.state = state
@@ -38,14 +40,34 @@ final class Item: ListDiffable {
         self.processData(data)
     }
     
+    init(itemToCopy item: Item) {
+        self.state = item.state
+        self.viewerState = item.viewerState
+        self.category = item.category
+        self.description = item.description
+        self.name = item.name
+        self.imageURLString = item.imageURLString
+        self.aspectRatio = item.aspectRatio
+        self.itemID = item.itemID
+    }
+    
     func processData(_ data: [String: Any]) {
         self.itemID = data["id"] as? Int
         self.name = data["name"] as? String
         self.description = data["description"] as? String
-        if let thumbnail = data["thumbnail"] as? [String: String] {
-            var path = thumbnail["path"]
-            path = path?.replacingOccurrences(of: "http", with: "https")
-            self.imageURLString = path
+        
+        if let thumbnail = data["thumbnail"] as? [String: String],
+            var path = thumbnail["path"],
+            let pathExt = thumbnail["extension"]
+        {
+            path = path.replacingOccurrences(of: "http", with: "https")
+            self.imageURLString = path + "/portrait_fantastic." + pathExt
+            self.aspectRatio = 2/3
+        }
+        
+        if (self.description ?? "").isEmpty || (self.imageURLString ?? "").contains("image_not_available") {
+            // commented to reduce api calls, uncomment to only see those with images and descriptions
+            //self.skipItem = true
         }
     }
     
@@ -55,8 +77,9 @@ final class Item: ListDiffable {
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
         guard let object = object as? Item else { return false }
+        
         if self.diffIdentifier().isEqual(object.diffIdentifier()) {
-            return self.state == object.state
+            return self.state == object.state && self.viewerState == object.viewerState
         }
         return false
     }

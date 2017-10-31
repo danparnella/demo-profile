@@ -13,7 +13,7 @@ final class ContentHeaderViewModel: ListDiffable {
     let title: String
     let description: String?
     
-    let kHeaderDefaultHeight: CGFloat = 48
+    let kHeaderDefaultHeight: CGFloat = 40
     let kHeaderBottomPadding: CGFloat = 3
     
     init(title: String, description: String? = nil) {

@@ -75,7 +75,7 @@ extension ProfileInfoSectionController: ListBindingSectionControllerDataSource {
                 return height
             case is ProfileFriendingViewModel:
                 if !data.ownProfile {
-                    return 161
+                    return 131
                 }
                 return 0
             default:

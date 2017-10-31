@@ -32,10 +32,6 @@ final class ProfileViewController: UIViewController {
     let ownProfile = randomBool()
     weak var delegate: ProfileViewControllerDelegate?
     
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.backgroundPhotoView.changePhotoView.isHidden = !self.ownProfile
@@ -85,7 +81,8 @@ extension ProfileViewController {
 extension ProfileViewController: ListAdapterDataSource {
     func updateMainAdapter() {
         self.adapter.performUpdates(animated: true) { (finished) in
-//            self.updateThreshold()
+            self.updateThreshold()
+            self.dataModel.items?.gettingData = false
         }
     }
     
@@ -100,8 +97,7 @@ extension ProfileViewController: ListAdapterDataSource {
             return sectionController
         } else if object is ItemsData {
             let sectionController = ItemsListSectionController()
-//            self.dataModel.todosDataVM.paginationDelegate = sectionController
-
+            self.dataModel.items?.updateDelegate = sectionController
             return sectionController
         }
         return ListSectionController()
@@ -119,7 +115,7 @@ extension ProfileViewController: UIScrollViewDelegate {
         
         self.updateFrames(framesOffset)
         
-//        self.dataModel.checkThreshold(offset)
+        self.dataModel.checkThreshold(offset)
         
         self.scrubAnimations(offset)
         if offset <= backgroundMinusHeader {
@@ -138,9 +134,9 @@ extension ProfileViewController: UIScrollViewDelegate {
         self.backgroundPhotoView.scrubChangePhotoAlpha(scrollViewOffset: offset)
     }
     
-//    func updateThreshold() {
-//        self.dataModel.threshold += (self.collectionView.contentSize.height - self.dataModel.threshold) * 0.6
-//    }
+    func updateThreshold() {
+        self.dataModel.threshold = self.collectionView.contentSize.height - 1500
+    }
 }
 
 // MARK: Delegate

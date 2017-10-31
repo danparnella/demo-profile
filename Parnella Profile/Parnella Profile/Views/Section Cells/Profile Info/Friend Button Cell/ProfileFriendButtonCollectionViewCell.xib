@@ -21,10 +21,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ProfileFriendButtonCollectionViewCell" customModule="Parnella_Profile" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="405" height="161"/>
+            <rect key="frame" x="0.0" y="0.0" width="405" height="131"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="405" height="161"/>
+                <rect key="frame" x="0.0" y="0.0" width="405" height="131"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZj-TS-VWS">
@@ -125,7 +125,7 @@ to see their items</string>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="97g-94-WJ4" secondAttribute="trailing" id="bQK-rF-BN6"/>
                 <constraint firstItem="fXh-BZ-Emc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="28" id="hM2-M0-ndj"/>
                 <constraint firstItem="dZj-TS-VWS" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="jez-qu-cTC"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="97g-94-WJ4" secondAttribute="bottom" constant="40" id="mMo-WX-5KB"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="97g-94-WJ4" secondAttribute="bottom" constant="10" id="mMo-WX-5KB"/>
                 <constraint firstItem="fXh-BZ-Emc" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="mng-ii-dnA"/>
                 <constraint firstItem="97g-94-WJ4" firstAttribute="top" secondItem="dZj-TS-VWS" secondAttribute="bottom" constant="12" id="raC-k8-OT1"/>
                 <constraint firstItem="97g-94-WJ4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xIN-9I-wV0"/>

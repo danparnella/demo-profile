@@ -9,8 +9,12 @@
 import UIKit
 import IGListKit
 
-protocol ItemsDataDelegate: class {
+protocol ItemsInitialDataDelegate: class {
     func itemsLoaded(data: ItemsData)
+}
+
+protocol ItemsUpdateDataDelegate: class {
+    func itemsUpdated(newItems: [Item])
 }
 
 final class ItemsData: ListDiffable {
@@ -21,29 +25,38 @@ final class ItemsData: ListDiffable {
     var source: ItemSource
     var items = [Item]()
     var headerTitle: String?
+    var offset = 20 * Int(arc4random_uniform(75))
     
-    weak var delegate: ItemsDataDelegate?
+    var gettingData = false
+    weak var loadDelegate: ItemsInitialDataDelegate?
+    weak var updateDelegate: ItemsUpdateDataDelegate?
     
-    init(delegate: ItemsDataDelegate, source: ItemSource, headerTitle: String?) {
-        self.delegate = delegate
+    init(loadDelegate: ItemsInitialDataDelegate, source: ItemSource, headerTitle: String?) {
+        self.loadDelegate = loadDelegate
         self.source = source
         self.headerTitle = headerTitle
         self.getRandomItemData()
     }
     
-    func getRandomItemData() {
+    func getRandomItemData(nextPage: Bool = false) {
+        guard offset <= 1491 else { return }
+        
+        self.gettingData = true
+        
         let timeStamp = String(describing: Date().timeIntervalSince1970)
         let stringToConvert = "\(timeStamp)8106d4f20bb85aa99ebf0d8d26721409a7b3fe6d1ef56758b1bca5e8c20487af3e11a458"
-        guard let url = URL(string: "https://gateway.marvel.com/v1/public/characters?ts=\(timeStamp)&apikey=1ef56758b1bca5e8c20487af3e11a458&hash=\(self.apiHash(stringToConvert))") else {
+        guard let url = URL(string: "https://gateway.marvel.com/v1/public/characters?orderBy=modified&offset=\(self.offset)&ts=\(timeStamp)&apikey=1ef56758b1bca5e8c20487af3e11a458&hash=\(stringToConvert.apiHash())") else {
             print("URL broke :(")
             return
         }
+        
+        self.offset += 20
         
         let urlSession = URLSession.shared.dataTask(with:url) { (data, response, error) in
             if let data = data {
                 do {
                     let response = try JSONSerialization.jsonObject(with: data, options: [])
-                    self.createItems(data: response)
+                    self.createItems(data: response, nextPage: nextPage)
                 } catch let error as NSError {
                     print(error)
                 }
@@ -54,7 +67,9 @@ final class ItemsData: ListDiffable {
         urlSession.resume()
     }
     
-    func createItems(data: Any) {        
+    func createItems(data: Any, nextPage: Bool) {
+        var nextPageArray = [Item]()
+        
         if let container = data as? [String: Any],
             let characterDataContainer = container["data"] as? [String: Any],
             let characterResults = characterDataContainer["results"] as? [[String: Any]]
@@ -66,26 +81,25 @@ final class ItemsData: ListDiffable {
                         nextItem.viewerState = viewerState
                     }
                 }
-                self.items.append(nextItem)
+                if !nextItem.skipItem {
+                    if nextPage {
+                        nextPageArray.append(nextItem)
+                    } else {
+                        self.items.append(nextItem)
+                    }
+                }
             }
             
-            self.delegate?.itemsLoaded(data: self)
+            if nextPage {
+                self.updateDelegate?.itemsUpdated(newItems: nextPageArray)
+            } else {
+                if self.items.count > 5 {
+                    self.loadDelegate?.itemsLoaded(data: self)
+                } else {
+                    self.getRandomItemData()
+                }
+            }
         }
-    }
-    
-    func apiHash(_ string: String) -> String {
-        let context = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
-        var digest = Array<UInt8>(repeating:0, count:Int(CC_MD5_DIGEST_LENGTH))
-        CC_MD5_Init(context)
-        CC_MD5_Update(context, string, CC_LONG(string.lengthOfBytes(using: String.Encoding.utf8)))
-        CC_MD5_Final(&digest, context)
-        context.deallocate(capacity: 1)
-        var hexString = ""
-        for byte in digest {
-            hexString += String(format:"%02x", byte)
-        }
-        
-        return hexString
     }
     
     func diffIdentifier() -> NSObjectProtocol {

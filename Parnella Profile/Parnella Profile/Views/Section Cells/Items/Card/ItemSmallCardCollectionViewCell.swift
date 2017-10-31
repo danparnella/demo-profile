@@ -16,7 +16,7 @@ public enum ItemAction {
 }
 
 protocol ItemActionDelegate: class {
-    func itemButtonTapped(_ action: ItemAction, index: Int)
+    func itemButtonTapped(_ action: ItemAction, itemID: Int)
 }
 
 class ItemSmallCardCollectionViewCell: UICollectionViewCell, NibReusable {
@@ -39,7 +39,12 @@ class ItemSmallCardCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var rightButtonIcon: UIImageView!
     @IBOutlet weak var rightButtonLabel: UILabel!
     
-    var index = 0
+    var item: Item! {
+        didSet {
+            self.updateCell()
+        }
+    }
+    
     var source: ItemsData.ItemSource!
     weak var delegate: ItemActionDelegate?
     var isUpdate = false
@@ -64,7 +69,7 @@ class ItemSmallCardCollectionViewCell: UICollectionViewCell, NibReusable {
         }
     }
     
-    func updateCell(_ item: Item) {
+    func updateCell() {
 //        guard let catid = item.getCategoryIdAsInt(), let category = VivaneerCategory(rawValue: catid) else {
 //            return
 //        }
@@ -75,7 +80,7 @@ class ItemSmallCardCollectionViewCell: UICollectionViewCell, NibReusable {
         }
         
         self.itemStateLabel.fadeTransition(isEnabled: self.isUpdate)
-        if item.state == .completed {
+        if self.item.state == .completed {
             self.itemStateLabel.text = "COMPLETED"
             self.itemStateLabel.backgroundColor = Colors().blue
             self.imageView.backgroundColor = Colors().blue
@@ -88,26 +93,26 @@ class ItemSmallCardCollectionViewCell: UICollectionViewCell, NibReusable {
 //        self.categoryLogo.fadeTransition(isEnabled: self.isUpdate)
 //        self.categoryLogo.image = category.getImage()
         
-        self.name.text = item.name
-        self.descriptionLabel.text = item.description
+        self.name.text = self.item.name
+        self.descriptionLabel.text = self.item.description
         
-        self.setFooterButtons(item)
+        self.setFooterButtons()
     }
 
-    func setFooterButtons(_ item: Item) {
+    func setFooterButtons() {
         self.leftButtonLabel.fadeTransition(isEnabled: self.isUpdate)
         self.rightButtonLabel.fadeTransition(isEnabled: self.isUpdate)
         self.rightButtonLabel.text = "Complete"
         
         if self.source == .yours {
-            if item.state == .completed {
+            if self.item.state == .completed {
                 self.youCompleted()
             } else {
                 self.youAdded()
             }
-        } else if item.viewerState == .completed {
+        } else if self.item.viewerState == .completed {
             self.othersYouCompleted()
-        } else if item.viewerState == .toDo {
+        } else if self.item.viewerState == .toDo {
             self.othersYouAdded()
         } else {
             self.othersNotAddedOrCompleted()
@@ -172,15 +177,15 @@ class ItemSmallCardCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBAction func leftButtonTapped(_ sender: UIButton) {
         if sender.tag == 0 { // ADD
             sender.isUserInteractionEnabled = false
-            self.delegate?.itemButtonTapped(.add, index: self.index)
+            self.delegate?.itemButtonTapped(.add, itemID: self.item.itemID)
         } else { // REMOVE
-            self.delegate?.itemButtonTapped(.remove, index: self.index)
+            self.delegate?.itemButtonTapped(.remove, itemID: self.item.itemID)
         }
     }
     
     @IBAction func rightButtonTapped(_ sender: UIButton) {
         if sender.tag == 0 { // COMPLETE
-            self.delegate?.itemButtonTapped(.complete, index: self.index)
+            self.delegate?.itemButtonTapped(.complete, itemID: self.item.itemID)
         }
     }
 }
@@ -188,6 +193,6 @@ class ItemSmallCardCollectionViewCell: UICollectionViewCell, NibReusable {
 extension ItemSmallCardCollectionViewCell: ListBindable {
     func bindViewModel(_ viewModel: Any) {
         guard let item = viewModel as? Item else { return }
-        self.updateCell(item)
+        self.item = item
     }
 }
