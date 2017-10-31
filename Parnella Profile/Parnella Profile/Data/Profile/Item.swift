@@ -91,8 +91,8 @@ extension Item {
         guard let itemName = self.name else { return 0 }
         let item = self
         
-        let annotationPadding: CGFloat = 3
-        let topPadding: CGFloat = 32
+        let stackViewSpacing: CGFloat = 8
+        let topPadding: CGFloat = 18
         let bottomPadding: CGFloat = 15
         let buttonsPadding: CGFloat = 46
         let sidePadding: CGFloat = (8 * 2)
@@ -110,26 +110,11 @@ extension Item {
             let descriptionFont = LatoFont().bold.withSize(descriptionFontSize)
             let descriptionHeight = description.heightFromText(font: descriptionFont, width: width - sidePadding)
             if descriptionHeight > 0 {
-                height += annotationPadding + descriptionHeight
+                height += stackViewSpacing + descriptionHeight
             }
         } else {
-            height += annotationPadding
+            height += 3
         }
-        
-//        if let articleAddedFrom = item.addedFromArticle() {
-//            if !articleAddedFrom.sourceName.isEmpty {
-//                let source = articleAddedFrom.sourceName
-//                let sourceFont = fontLato(withSize: 10)
-//                let sourceHeight = source.heightFromText(sourceFont, width: width - sidePadding)
-//                if sourceHeight > 0 {
-//                    height = height + annotationPadding + sourceHeight
-//                }
-//            } else {
-//                height = height + annotationPadding
-//            }
-//        } else {
-//            height = height + annotationPadding
-//        }
         
         return height
     }
