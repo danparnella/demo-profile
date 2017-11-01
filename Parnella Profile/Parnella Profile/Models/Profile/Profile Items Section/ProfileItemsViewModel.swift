@@ -22,16 +22,5 @@ class ProfileItemsViewModel: ListDiffable {
     
     func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
         return true
-//        guard let object = object as? ProfileItemsViewModel else { return false }
-//
-//        if self.items.count == object.items.count {
-//            for (index, selfItem) in self.items.enumerated() {
-//                if !selfItem.isEqual(toDiffableObject: object.items[index]) {
-//                    return false
-//                }
-//            }
-//            return true
-//        }
-//        return false
     }
 }

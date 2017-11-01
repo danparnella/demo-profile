@@ -36,7 +36,7 @@
                                         <rect key="frame" x="0.0" y="12" width="128" height="114.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="QPe-eC-C4g">
-                                                <rect key="frame" x="42.5" y="60.5" width="43.5" height="43.5"/>
+                                                <rect key="frame" x="43" y="60.5" width="43.5" height="43.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="167" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTk-1N-DbV">
                                                         <rect key="frame" x="3" y="0.0" width="37" height="26"/>
@@ -245,6 +245,7 @@
                 <outlet property="imageView" destination="Jeg-xg-SUX" id="owR-Mc-tXD"/>
                 <outlet property="photoBorderView" destination="nbp-na-9ck" id="ed3-yr-eKi"/>
                 <outlet property="photoContainerView" destination="CTf-tW-Ku4" id="dZm-MF-dOt"/>
+                <outlet property="photoDropShadowView" destination="F6v-xL-kKN" id="g7h-pa-yVc"/>
                 <outlet property="photoViews" destination="Y74-eU-e7c" id="ZgQ-C4-QTt"/>
             </connections>
             <point key="canvasLocation" x="10" y="-42"/>

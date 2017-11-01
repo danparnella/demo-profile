@@ -11,13 +11,27 @@ import Reusable
 
 @IBDesignable
 final class ProfileBackgroundHeader: UIView, NibReusable {
+    let nibName = ProfileBackgroundHeader.reuseIdentifier
+
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageBlurContainerView: UIView!
+    
     @IBOutlet weak var changePhotoView: UIView!
     @IBOutlet weak var changePhotoIcon: UIImageView!
+    
+    @IBOutlet weak var profileNameLabel: UILabel!
+    @IBOutlet weak var profileNameLabelTopConstraint: NSLayoutConstraint!
+
     var imageBlurView: ProfileBackgroundBlurView?
     
-    let nibName = ProfileBackgroundHeader.reuseIdentifier
+    var originalNameTopConstraintConstant: CGFloat? {
+        willSet {
+            if let topConstraintConstant = newValue {
+                self.profileNameLabelTopConstraint.constant = topConstraintConstant
+                self.layoutIfNeeded()
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

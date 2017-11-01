@@ -11,7 +11,7 @@ import IGListKit
 import Nuke
 
 protocol ProfileViewControllerDelegate: class {
-    func updateBasedOnScroll(_ offset: CGFloat)
+    func updateBasedOnScroll(_ offset: CGFloat, backgroundPhotoView: ProfileBackgroundHeader)
 }
 
 final class ProfileViewController: UIViewController {
@@ -118,9 +118,7 @@ extension ProfileViewController: UIScrollViewDelegate {
         self.dataModel.checkThreshold(offset)
         
         self.scrubAnimations(offset)
-        if offset <= backgroundMinusHeader {
-            self.delegate?.updateBasedOnScroll(offset)
-        }
+        self.delegate?.updateBasedOnScroll(offset, backgroundPhotoView: self.backgroundPhotoView)
     }
     
     func updateFrames(_ offset: CGFloat) {
@@ -151,19 +149,8 @@ extension ProfileViewController: ProfileDataModelDelegate {
     
     func dataLoaded() {
         DispatchQueue.main.async {
+            self.backgroundPhotoView.profileNameLabel.text = self.dataModel.profileDetails?.fullName
             self.updateMainAdapter()
         }
     }
-    
-//    func loadData() {
-//        if let profileDetails = self.dataModel.profileVCDataModel.profileDetails {
-//            if let url = URL(string: profileDetails.backgroundURL) {
-//                NetworkImageManager.shared().commonManager.loadImage(with: url, into: self.backgroundPhotoView.imageView)
-//            } else {
-//                self.backgroundPhotoView.imageView.image = #imageLiteral(resourceName: "ProfileDefaultBackground")
-//            }
-//        }
-//
-//        self.updateMainAdapter()
-//    }
 }

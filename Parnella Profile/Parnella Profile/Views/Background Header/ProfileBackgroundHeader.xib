@@ -10,6 +10,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Black.ttf">
+            <string>Lato-Black</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileBackgroundHeader" customModule="Parnella_Profile" customModuleProvider="target">
             <connections>
@@ -17,26 +22,28 @@
                 <outlet property="changePhotoView" destination="swU-wo-u9P" id="Zc7-27-noB"/>
                 <outlet property="imageBlurContainerView" destination="0Is-Wr-7Sg" id="Q1D-uM-naf"/>
                 <outlet property="imageView" destination="LMH-bE-O99" id="L9U-dK-rLY"/>
+                <outlet property="profileNameLabel" destination="oGz-Kk-aTP" id="3yr-Ei-s1c"/>
+                <outlet property="profileNameLabelTopConstraint" destination="BAc-Gg-paM" id="8TP-hg-mBO"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="496" height="220"/>
+            <rect key="frame" x="0.0" y="0.0" width="423" height="213"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LMH-bE-O99">
-                    <rect key="frame" x="0.0" y="0.0" width="496" height="220"/>
+                    <rect key="frame" x="-1.5" y="0.0" width="426" height="213"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="LMH-bE-O99" secondAttribute="height" multiplier="2:1" priority="999" id="yPO-EV-NMn"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Is-Wr-7Sg">
-                    <rect key="frame" x="0.0" y="0.0" width="496" height="220"/>
+                    <rect key="frame" x="-1.5" y="0.0" width="426" height="213"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="swU-wo-u9P">
-                    <rect key="frame" x="0.0" y="182" width="496" height="38"/>
+                    <rect key="frame" x="0.0" y="175" width="423" height="38"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_change_photo" translatesAutoresizingMaskIntoConstraints="NO" id="mys-cr-oBG">
                             <rect key="frame" x="20" y="4.5" width="30" height="30"/>
@@ -54,16 +61,25 @@
                         <constraint firstAttribute="height" constant="38" id="rm3-N4-eRn"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGz-Kk-aTP">
+                    <rect key="frame" x="0.0" y="213" width="423" height="20"/>
+                    <fontDescription key="fontDescription" name="Lato-Black" family="Lato" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="LMH-bE-O99" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="47C-oW-FJc"/>
                 <constraint firstItem="LMH-bE-O99" firstAttribute="width" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="width" id="7HU-xT-nHT"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="swU-wo-u9P" secondAttribute="trailing" id="AjR-oU-erl"/>
+                <constraint firstItem="oGz-Kk-aTP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="BAc-Gg-paM"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="oGz-Kk-aTP" secondAttribute="trailing" id="Dfn-Xm-9zj"/>
                 <constraint firstItem="0Is-Wr-7Sg" firstAttribute="leading" secondItem="LMH-bE-O99" secondAttribute="leading" id="Grs-Ao-sco"/>
                 <constraint firstItem="0Is-Wr-7Sg" firstAttribute="top" secondItem="LMH-bE-O99" secondAttribute="top" id="Wzm-Zd-KjJ"/>
                 <constraint firstItem="LMH-bE-O99" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="a9H-Rb-bVx"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="LMH-bE-O99" secondAttribute="bottom" id="cCO-OK-Qy7"/>
+                <constraint firstItem="oGz-Kk-aTP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="cN3-HU-chm"/>
                 <constraint firstItem="swU-wo-u9P" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="dGM-a3-VUI"/>
                 <constraint firstItem="0Is-Wr-7Sg" firstAttribute="bottom" secondItem="LMH-bE-O99" secondAttribute="bottom" id="fxY-P1-F5A"/>
                 <constraint firstItem="0Is-Wr-7Sg" firstAttribute="trailing" secondItem="LMH-bE-O99" secondAttribute="trailing" id="uoA-3u-erA"/>
@@ -71,7 +87,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-23" y="-242"/>
+            <point key="canvasLocation" x="-59.5" y="-221.5"/>
         </view>
     </objects>
     <resources>

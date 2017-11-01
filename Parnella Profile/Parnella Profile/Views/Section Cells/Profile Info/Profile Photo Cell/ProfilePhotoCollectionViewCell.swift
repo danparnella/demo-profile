@@ -26,6 +26,7 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var followingTallyLabel: UILabel!
     
     @IBOutlet weak var photoViews: UIView!
+    @IBOutlet weak var photoDropShadowView: UIImageView!
     @IBOutlet weak var photoBorderView: UIView!
     @IBOutlet weak var photoContainerView: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -103,19 +104,32 @@ extension ProfilePhotoCollectionViewCell: ListBindable {
 
 // MARK: Delegate
 extension ProfilePhotoCollectionViewCell: ProfileViewControllerDelegate {
-    func updateBasedOnScroll(_ offset: CGFloat) {
+    func updateBasedOnScroll(_ offset: CGFloat, backgroundPhotoView: ProfileBackgroundHeader) {
         guard let originalYOrigin = self.photoViewsYOrigin else { return }
+
+        if backgroundPhotoView.originalNameTopConstraintConstant == nil {
+            backgroundPhotoView.originalNameTopConstraintConstant = self.frame.height - self.backgroundPhotoButtonHeightConstraint.constant + 18
+        }
         
-        if offset > 0 {
-            var scale = 1 - offset/350
-            scale = (scale <= 0) ? 0.1 : scale
-            self.photoViews.transform = CGAffineTransform(scaleX: scale, y: scale)
-            
-            let originOffset = offset/2.65
-            self.photoViews.frame.origin.y = originalYOrigin + originOffset
-        } else {
-            self.photoViews.transform = CGAffineTransform.identity
-            self.photoViews.frame.origin.y = originalYOrigin
+        if offset <= self.backgroundPhotoButtonHeightConstraint.constant {
+            if offset > 0 {
+                var scale = 1 - offset/350
+                scale = (scale <= 0) ? 0.1 : scale
+                self.photoViews.transform = CGAffineTransform(scaleX: scale, y: scale)
+                
+                let originOffset = offset/2.65
+                self.photoViews.frame.origin.y = originalYOrigin + originOffset
+                self.photoDropShadowView.alpha = 1 - offset/85
+            } else {
+                self.photoViews.transform = CGAffineTransform.identity
+                self.photoViews.frame.origin.y = originalYOrigin
+                self.photoDropShadowView.alpha = 1
+            }
+        } else if let originalTopConstraint = backgroundPhotoView.originalNameTopConstraintConstant {
+            var newConstant = originalTopConstraint - (offset - self.backgroundPhotoButtonHeightConstraint.constant)
+            newConstant = (newConstant >= -32.5) ? newConstant : -32.5
+            backgroundPhotoView.profileNameLabelTopConstraint.constant = newConstant
+            backgroundPhotoView.layoutIfNeeded()
         }
     }
 }
