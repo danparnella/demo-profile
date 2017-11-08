@@ -112,6 +112,8 @@ extension ProfilePhotoCollectionViewCell: ProfileViewControllerDelegate {
         }
         
         if offset <= self.backgroundPhotoButtonHeightConstraint.constant {
+            self.alpha = 1
+            
             if offset > 0 {
                 var scale = 1 - offset/350
                 scale = (scale <= 0) ? 0.1 : scale
@@ -130,6 +132,13 @@ extension ProfilePhotoCollectionViewCell: ProfileViewControllerDelegate {
             newConstant = (newConstant >= -32.5) ? newConstant : -32.5
             backgroundPhotoView.profileNameLabelTopConstraint.constant = newConstant
             backgroundPhotoView.layoutIfNeeded()
+            
+            let photoViewScrollDistance = self.backgroundPhotoButtonHeightConstraint.constant + 25
+            if offset >= photoViewScrollDistance {
+                self.alpha = 1 - (offset - photoViewScrollDistance)/30
+            } else {
+                self.alpha = 1
+            }
         }
     }
 }

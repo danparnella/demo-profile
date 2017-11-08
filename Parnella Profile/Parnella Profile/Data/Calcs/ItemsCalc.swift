@@ -17,7 +17,6 @@ struct ItemsCalc {
     
     let itemPaddingX: CGFloat = 8
     let itemPaddingY: CGFloat = 10
-    let itemSourceLabelHeight: CGFloat = 20
     
     init(items: [Item], contentWidth: CGFloat) {
         self.items = items
@@ -53,15 +52,12 @@ struct ItemsCalc {
         if item.aspectRatio > 0 {
             return self.itemWidth/item.aspectRatio
         }
-        if item.state == .completed {
-            return self.itemWidth
-        }
-        return self.itemWidth * (3/4)
+        return self.itemWidth
     }
     
     func getItemHeight(forItem item: Item) -> CGFloat {
         let photoHeight = self.getPhotoHeight(forItem: item)
         let annotationHeight = item.getItemHeight(width: self.itemWidth)
-        return self.itemPaddingY + self.itemSourceLabelHeight + photoHeight + annotationHeight + self.itemPaddingY
+        return self.itemPaddingY + photoHeight + annotationHeight + self.itemPaddingY
     }
 }

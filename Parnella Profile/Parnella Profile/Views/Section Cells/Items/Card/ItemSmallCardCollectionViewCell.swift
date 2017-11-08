@@ -12,7 +12,7 @@ import IGListKit
 import Nuke
 
 public enum ItemAction {
-    case add, remove, complete
+    case follow, unfollow
 }
 
 protocol ItemActionDelegate: class {
@@ -22,22 +22,15 @@ protocol ItemActionDelegate: class {
 class ItemSmallCardCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var shadowView: UIView!
     
-    @IBOutlet weak var itemStateLabel: UILabel!
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var categoryIcon: UIImageView!
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    @IBOutlet weak var leftButton: UIButton!
-    @IBOutlet weak var leftButtonIcon: UIImageView!
-    @IBOutlet weak var leftButtonLabel: UILabel!
-    
-    @IBOutlet weak var rightButton: UIButton!
-    @IBOutlet weak var rightButtonIcon: UIImageView!
-    @IBOutlet weak var rightButtonLabel: UILabel!
+    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var actionButtonIcon: UIImageView!
+    @IBOutlet weak var actionButtonLabel: UILabel!
     
     var item: Item! {
         didSet {
@@ -49,11 +42,12 @@ class ItemSmallCardCollectionViewCell: UICollectionViewCell, NibReusable {
     weak var delegate: ItemActionDelegate?
     var isUpdate = false
     
+    let kPlaceholderDescription = "No description was provided for this character."
+    
     override func awakeFromNib () {
         super.awakeFromNib()
         self.shadowView.addShadow()
-        self.leftButtonIcon.changeImageColor(to: Colors().green)
-        self.rightButtonIcon.changeImageColor(to: Colors().blue)
+        self.actionButtonIcon.changeImageColor(to: Colors().green)
     }
     
     override func prepareForReuse() {
@@ -70,122 +64,78 @@ class ItemSmallCardCollectionViewCell: UICollectionViewCell, NibReusable {
     }
     
     func updateCell() {
-//        guard let catid = item.getCategoryIdAsInt(), let category = VivaneerCategory(rawValue: catid) else {
-//            return
-//        }
-        
         self.imageView.fadeTransition(isEnabled: self.isUpdate)
         if let url = URL(string: item.imageURLString ?? "") {
             Nuke.loadImage(with: url, into: self.imageView)
         }
         
-        self.itemStateLabel.fadeTransition(isEnabled: self.isUpdate)
-        if self.item.state == .completed {
-            self.itemStateLabel.text = "COMPLETED"
-            self.itemStateLabel.backgroundColor = Colors().blue
-            self.imageView.backgroundColor = Colors().blue
-        } else {
-            self.itemStateLabel.text = "TO DO"
-            self.itemStateLabel.backgroundColor = Colors().green
-            self.imageView.backgroundColor = Colors().green
-        }
-        
-//        self.categoryLogo.fadeTransition(isEnabled: self.isUpdate)
-//        self.categoryLogo.image = category.getImage()
-        
         self.name.text = self.item.name
-        self.descriptionLabel.text = self.item.description
+        self.descriptionLabel.text = self.item.description ?? self.kPlaceholderDescription
         
-        self.setFooterButtons()
+        self.setupActionButton()
     }
 
-    func setFooterButtons() {
-        self.leftButtonLabel.fadeTransition(isEnabled: self.isUpdate)
-        self.rightButtonLabel.fadeTransition(isEnabled: self.isUpdate)
-        self.rightButtonLabel.text = "Complete"
+    func setupActionButton() {
+        self.actionButtonLabel.fadeTransition(isEnabled: self.isUpdate)
         
         if self.source == .yours {
-            if self.item.state == .completed {
-                self.youCompleted()
-            } else {
-                self.youAdded()
-            }
-        } else if self.item.viewerState == .completed {
-            self.othersYouCompleted()
-        } else if self.item.viewerState == .toDo {
-            self.othersYouAdded()
+            self.yoursFollowing()
+        } else if self.item.viewerState == .following {
+            self.othersFollowing()
         } else {
-            self.othersNotAddedOrCompleted()
+            self.othersNotFollowing()
         }
         
         self.isUpdate = true
     }
     
-    func youAdded() {
-        self.togglePlusIcon(showAdd: false)
-        self.leftButtonLabel.text = "Remove"
-        self.leftButton.tag = 1
+    func yoursFollowing() {
+        self.togglePlusIcon(following: true)
+        self.actionButtonLabel.text = "Unfollow"
+        self.actionButton.tag = 1
     }
     
-    func youCompleted() {
-        self.togglePlusIcon(showAdd: true)
-        self.leftButtonLabel.text = "Add Again"
-        self.rightButtonLabel.text = "Complete Again"
-        self.leftButton.tag = 0
+    func othersFollowing() {
+        self.togglePlusIcon(following: true)
+        self.actionButtonLabel.text = "Following"
+        self.actionButton.tag = 1
     }
     
-    func othersYouAdded() {
-        self.togglePlusIcon(showAdd: false)
-        self.leftButtonLabel.text = "On Your List"
-        self.leftButton.tag = 1
+    func othersNotFollowing() {
+        self.togglePlusIcon(following: false)
+        self.actionButtonLabel.text = "Follow"
+        self.actionButton.tag = 0
     }
     
-    func othersYouCompleted() {
-        self.youCompleted()
-    }
-    
-    func othersNotAddedOrCompleted() {
-        self.togglePlusIcon(showAdd: true)
-        self.leftButtonLabel.text = "Add To Do"
-        self.leftButton.tag = 0
-    }
-    
-    func togglePlusIcon(showAdd: Bool) {
+    func togglePlusIcon(following: Bool) {
         func animate(toColor color: UIColor) {
             var duration = (self.isUpdate) ? 0.5 : 0
             UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.35, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-                self.leftButtonIcon.transform = self.leftButtonIcon.transform.rotated(by: .pi/4)
+                self.actionButtonIcon.transform = self.actionButtonIcon.transform.rotated(by: .pi/4)
             })
             
             duration = (self.isUpdate) ? 0.3 : 0
             UIView.animate(withDuration: duration) {
-                self.leftButtonIcon.changeImageColor(to: color)
+                self.actionButtonIcon.changeImageColor(to: color)
             }
         }
         
-        if showAdd {
-            if self.leftButtonIcon.tintColor == Colors().red {
-                animate(toColor: Colors().green)
-            }
-        } else {
-            if self.leftButtonIcon.tintColor == Colors().green {
+        if following {
+            if self.actionButtonIcon.tintColor == Colors().green {
                 animate(toColor: Colors().red)
             }
+        } else {
+            if self.actionButtonIcon.tintColor == Colors().red {
+                animate(toColor: Colors().green)
+            }
         }
     }
     
-    @IBAction func leftButtonTapped(_ sender: UIButton) {
-        if sender.tag == 0 { // ADD
-            sender.isUserInteractionEnabled = false
-            self.delegate?.itemButtonTapped(.add, itemID: self.item.itemID)
-        } else { // REMOVE
-            self.delegate?.itemButtonTapped(.remove, itemID: self.item.itemID)
-        }
-    }
-    
-    @IBAction func rightButtonTapped(_ sender: UIButton) {
-        if sender.tag == 0 { // COMPLETE
-            self.delegate?.itemButtonTapped(.complete, itemID: self.item.itemID)
+    @IBAction func actionButtonTapped(_ sender: UIButton) {
+        if sender.tag == 0 { // Follow
+            self.delegate?.itemButtonTapped(.follow, itemID: self.item.itemID)
+        } else { // Unfollow
+            self.delegate?.itemButtonTapped(.unfollow, itemID: self.item.itemID)
         }
     }
 }

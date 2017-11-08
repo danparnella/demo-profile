@@ -11,16 +11,10 @@ import IGListKit
 
 final class Item: ListDiffable {
     enum ItemState: Int {
-        case toDo, completed, neither
+        case following, notFollowing
     }
     
-    enum Category: Int {
-        case entertainment, foodDrink, travel, events, activities
-    }
-    
-    var state: ItemState?
-    var viewerState: ItemState?
-    var category: Category?
+    var viewerState: ItemState = .following
     var name: String?
     var description: String?
     var imageURLString: String?
@@ -31,19 +25,11 @@ final class Item: ListDiffable {
     var skipItem = false
     
     init(data: [String: Any]) {
-        if let state = ItemState(rawValue: Int(arc4random_uniform(2))) {
-            self.state = state
-        }
-        if let category = Category(rawValue: Int(arc4random_uniform(5))) {
-            self.category = category
-        }
         self.processData(data)
     }
     
     init(itemToCopy item: Item) {
-        self.state = item.state
         self.viewerState = item.viewerState
-        self.category = item.category
         self.description = item.description
         self.name = item.name
         self.imageURLString = item.imageURLString
@@ -54,7 +40,10 @@ final class Item: ListDiffable {
     func processData(_ data: [String: Any]) {
         self.itemID = data["id"] as? Int
         self.name = data["name"] as? String
-        self.description = data["description"] as? String
+        
+        if let description = data["description"] as? String {
+            self.description = (description.isEmpty) ? nil : description
+        }
         
         if let thumbnail = data["thumbnail"] as? [String: String],
             var path = thumbnail["path"],
@@ -66,7 +55,7 @@ final class Item: ListDiffable {
         }
         
         if (self.description ?? "").isEmpty || (self.imageURLString ?? "").contains("image_not_available") {
-            // commented to reduce api calls, uncomment to only see those with images and descriptions
+            // Commented to reduce api calls, uncomment to only see those with images and descriptions
             //self.skipItem = true
         }
     }
@@ -79,7 +68,7 @@ final class Item: ListDiffable {
         guard let object = object as? Item else { return false }
         
         if self.diffIdentifier().isEqual(object.diffIdentifier()) {
-            return self.state == object.state && self.viewerState == object.viewerState
+            return self.viewerState == object.viewerState
         }
         return false
     }
@@ -106,14 +95,12 @@ extension Item {
         
         height += topPadding + nameHeight + bottomPadding + buttonsPadding
         
-        if let description = item.description {
-            let descriptionFont = LatoFont().bold.withSize(descriptionFontSize)
-            let descriptionHeight = description.heightFromText(font: descriptionFont, width: width - sidePadding)
-            if descriptionHeight > 0 {
-                height += stackViewSpacing + descriptionHeight
-            }
-        } else {
-            height += 3
+        let descriptionFont = LatoFont().bold.withSize(descriptionFontSize)
+        let description = item.description ?? "No description was provided for this character."
+        
+        let descriptionHeight = description.heightFromText(font: descriptionFont, width: width - sidePadding)
+        if descriptionHeight > 0 {
+            height += stackViewSpacing + descriptionHeight
         }
         
         return height

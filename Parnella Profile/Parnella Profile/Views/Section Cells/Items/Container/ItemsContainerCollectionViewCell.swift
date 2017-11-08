@@ -38,17 +38,10 @@ extension ItemsContainerCollectionViewCell: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
         if indexPath.item < self.items.count {
             let item = self.items[indexPath.item]
-//            let boundingRect = CGRect(x: 0, y: 0, width: width, height: CGFloat(MAXFLOAT))
             if item.aspectRatio > 0 {
                 return width/item.aspectRatio
             }
-            if item.state == .completed {
-                return width
-            }
-            return width * (3/4)
-//            let height: CGFloat = (item.aspectRatio > 0) ? width/item.aspectRatio : (item.state == .completed) ? width : width * (3/4)
-//            let rect = AVMakeRect(aspectRatio: CGSize(width: width, height: height), insideRect: boundingRect)
-//            return rect.size.height
+            return width
         }
         return 0
     }

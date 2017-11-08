@@ -48,7 +48,6 @@ class PinterestLayout: UICollectionViewLayout {
     
     var cellPaddingX: CGFloat = 8
     var cellPaddingY: CGFloat = 10
-    var itemSourceLabelHeight: CGFloat = 20
     
     var cache = [PinterestLayoutAttributes]()
     
@@ -88,7 +87,7 @@ class PinterestLayout: UICollectionViewLayout {
                 let aspectRatio = width/photoHeight
                 
                 let annotationHeight = delegate.collectionView(collectionView, heightForAnnotationAtIndexPath: indexPath, withWidth: width)
-                let height = self.cellPaddingY + self.itemSourceLabelHeight + photoHeight + annotationHeight + self.cellPaddingY
+                let height = self.cellPaddingY + photoHeight + annotationHeight + self.cellPaddingY
                 
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
                 let insetFrame = frame.insetBy(dx: self.cellPaddingX, dy: self.cellPaddingY)

@@ -152,56 +152,19 @@ extension ItemsListSectionController: ItemsUpdateDataDelegate {
 extension ItemsListSectionController: ItemsSectionActionDelegate {
     func performButtonAction(_ action: ItemAction, on item: Item, itemSource: ItemsData.ItemSource) {
         switch action {
-        case .add:
-            if itemSource == .yours {
-                if let index = self.adapterDataIndex(itemID: item.itemID) {
-                    if self.tempItems[index].state == .toDo {
-                        self.removeItemFromAdapterData(at: index, refresh: false)
-                    }
-                }
-                
+        case .follow:
+            if let index = self.adapterDataIndex(itemID: item.itemID) {
                 let newItem = Item(itemToCopy: item)
-                newItem.state = .toDo
-                self.addToAdapterData(newItem)
-            } else {
-                if let index = self.adapterDataIndex(itemID: item.itemID) {
-                    let newItem = Item(itemToCopy: item)
-                    newItem.viewerState = .toDo
-                    self.updateAdapterData(withItem: newItem, at: index)
-                }
+                newItem.viewerState = .following
+                self.updateAdapterData(withItem: newItem, at: index)
             }
-        case .complete:
-            if itemSource == .yours {
-                if let index = self.adapterDataIndexForOriginalItem(itemID: item.itemID) {
-                    if index == 0 || item.state == .toDo {
-                        let newItem = Item(itemToCopy: item)
-                        newItem.state = .completed
-                        self.updateAdapterData(withItem: newItem, at: index)
-                    } else if item.state == .completed {
-                        self.removeItemFromAdapterData(at: index, refresh: true)
-                        runAfterDelay(0.25, function: {
-                            let newItem = Item(itemToCopy: item)
-                            self.addToAdapterData(newItem)
-                        })
-                    }
-                } else {
-                    let newItem = Item(itemToCopy: item)
-                    self.addToAdapterData(newItem)
-                }
-            } else {
-                if let index = self.adapterDataIndex(itemID: item.itemID) {
-                    let newItem = Item(itemToCopy: item)
-                    newItem.viewerState = .completed
-                    self.updateAdapterData(withItem: newItem, at: index)
-                }
-            }
-        case .remove:
+        case .unfollow:
             if let index = self.adapterDataIndex(itemID: item.itemID) {
                 if itemSource == .yours {
                     self.removeItemFromAdapterData(at: index, refresh: true)
                 } else {
                     let newItem = Item(itemToCopy: item)
-                    newItem.viewerState = .neither
+                    newItem.viewerState = .notFollowing
                     self.updateAdapterData(withItem: newItem, at: index)
                 }
             }
@@ -212,28 +175,11 @@ extension ItemsListSectionController: ItemsSectionActionDelegate {
         return self.tempItems.index(where: { $0.itemID == itemID })
     }
     
-    func adapterDataIndexForOriginalItem(itemID: Int) -> Int? {
-        if let index = self.tempItems.index(where: { (item) -> Bool in
-            if item.itemID == itemID, item.state != .completed {
-                return true
-            }
-            return false
-        }) {
-            return index
-        }
-        return nil
-    }
-    
     func removeItemFromAdapterData(at index: Int, refresh: Bool) {
         self.tempItems.remove(at: index)
         if refresh {
             self.runDataChangeOperations()
         }
-    }
-    
-    func addToAdapterData(_ item: Item) {
-        self.tempItems.insert(item, at: 0)
-        self.runDataChangeOperations()
     }
     
     func updateAdapterData(withItem item: Item, at index: Int) {

@@ -88,7 +88,7 @@ extension ProfileDataModel: ProfileDetailsDataDelegate {
         if let ownProfile = self.profileDetails?.ownProfile {
             self.ownProfile = ownProfile
             let source: ItemsData.ItemSource = (ownProfile) ? .yours : .others
-            _ = ItemsData(loadDelegate: self, source: source, headerTitle: "Characters")
+            _ = ItemsData(loadDelegate: self, source: source, headerTitle: "Followed Characters")
         }
     }
 }

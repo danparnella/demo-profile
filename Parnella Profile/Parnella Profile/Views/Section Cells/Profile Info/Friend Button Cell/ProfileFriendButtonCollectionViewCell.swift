@@ -39,7 +39,7 @@ class ProfileFriendButtonCollectionViewCell: UICollectionViewCell, NibReusable {
 // MARK: Cell Setup
 extension ProfileFriendButtonCollectionViewCell {
     func setupCell(data: ProfileFriendingViewModel) {
-        self.addFriendMessageLabel.text = self.addFriendMessageLabel.text?.replacingOccurrences(of: "*blank*", with: data.friendName)
+//        self.addFriendMessageLabel.text = self.addFriendMessageLabel.text?.replacingOccurrences(of: "*blank*", with: data.friendName)
         if data.requestSent {
             self.addFriendButton.setTitle("Cancel Request", for: .normal)
             self.addFriendButton.setTitleColor(Colors().red, for: .normal)

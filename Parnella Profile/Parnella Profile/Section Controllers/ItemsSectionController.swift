@@ -50,9 +50,9 @@ extension ItemsSectionController: ListBindingSectionControllerDataSource {
 // MARK: Delegate
 extension ItemsSectionController: ItemActionDelegate {
     func itemButtonTapped(_ action: ItemAction, itemID: Int) {
-//        if let item = object?.items.filter({ $0.itemID == itemID }).first {
-//            self.delegate?.performButtonAction(action, on: item, itemSource: self.itemsSource)
-//        }
+        if let item = object?.items.filter({ $0.itemID == itemID }).first {
+            self.delegate?.performButtonAction(action, on: item, itemSource: self.itemsSource)
+        }
     }
 }
 
