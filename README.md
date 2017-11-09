@@ -2,10 +2,12 @@
 Demo of a social network type profile of users and Marvel characters that they follow.
 
 Every time you open the app it's populated with random user data, which includes:
+
 - background and profile photos
 - name, location, birthday, relationship user (or single)
 - whether it's your own profile or someone else's
 - if someone else's, whether you've sent a request, are awaiting a response, have not interacted before or are friends already<br>
+
 and a random starting page of Marvel characters with pagination for more.
 
 **Available interactions:**
