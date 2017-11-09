@@ -136,6 +136,14 @@ to see their items</string>
                 <mask key="subviews">
                     <exclude reference="97g-94-WJ4"/>
                 </mask>
+                <mask key="constraints">
+                    <exclude reference="E2p-SB-gKq"/>
+                    <exclude reference="FWL-df-Kgk"/>
+                    <exclude reference="bQK-rF-BN6"/>
+                    <exclude reference="mMo-WX-5KB"/>
+                    <exclude reference="raC-k8-OT1"/>
+                    <exclude reference="xIN-9I-wV0"/>
+                </mask>
             </variation>
             <connections>
                 <outlet property="addFriendButton" destination="dZj-TS-VWS" id="f4z-ih-6wp"/>

@@ -8,34 +8,18 @@
 
 import UIKit
 
-protocol PinterestLayoutDelegate: class {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        heightForPhotoAtIndexPath indexPath: IndexPath,
-        withWidth:CGFloat
-    ) -> CGFloat
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        heightForAnnotationAtIndexPath indexPath: IndexPath,
-        withWidth width: CGFloat
-    ) -> CGFloat
-}
-
 class PinterestLayoutAttributes: UICollectionViewLayoutAttributes {
     var photoHeight: CGFloat = 0
-    var aspectRatio: CGFloat = 0
     
     override func copy(with zone: NSZone?) -> Any {
         let copy = super.copy(with: zone) as! PinterestLayoutAttributes
         copy.photoHeight = photoHeight
-        copy.aspectRatio = aspectRatio
         return copy
     }
     
     override func isEqual(_ object: Any?) -> Bool {
         if let attributes = object as? PinterestLayoutAttributes {
-            if attributes.photoHeight == photoHeight && attributes.aspectRatio == aspectRatio {
+            if attributes.photoHeight == photoHeight {
                 return super.isEqual(object)
             }
         }
@@ -44,11 +28,7 @@ class PinterestLayoutAttributes: UICollectionViewLayoutAttributes {
 }
 
 class PinterestLayout: UICollectionViewLayout {
-    weak var delegate: PinterestLayoutDelegate?
-    
-    var cellPaddingX: CGFloat = 8
-    var cellPaddingY: CGFloat = 10
-    
+    var itemsCalc: ItemsCalc!
     var cache = [PinterestLayoutAttributes]()
     
     fileprivate var contentHeight: CGFloat = 0
@@ -63,13 +43,12 @@ class PinterestLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
-        guard let collectionView = self.collectionView, let delegate = self.delegate else { fatalError() }
+        guard let collectionView = self.collectionView else { fatalError() }
         
         if self.cache.isEmpty {
-            self.contentHeight = 0
             let numberOfItems = collectionView.numberOfItems(inSection: 0)
             
-            let columnWidth = self.contentWidth/2
+            let columnWidth = self.itemsCalc.columnWidth
             var xOffset: [CGFloat] = [0, columnWidth]
             var column = 0
             var yOffset: [CGFloat] = [0, 0]
@@ -78,27 +57,22 @@ class PinterestLayout: UICollectionViewLayout {
                 return
             }
             
-            for item in 0 ..< numberOfItems {
-                let indexPath = IndexPath(item: item, section: 0)
-                let width = columnWidth - self.cellPaddingX * 2
+            for itemIndex in 0 ..< numberOfItems {
+                let indexPath = IndexPath(item: itemIndex, section: 0)
+                let currentItem = self.itemsCalc.items[itemIndex]
                 
-                var photoHeight = delegate.collectionView(collectionView, heightForPhotoAtIndexPath: indexPath, withWidth: width)
-                photoHeight = (photoHeight == 0) ? width : photoHeight
-                let aspectRatio = width/photoHeight
-                
-                let annotationHeight = delegate.collectionView(collectionView, heightForAnnotationAtIndexPath: indexPath, withWidth: width)
-                let height = self.cellPaddingY + photoHeight + annotationHeight + self.cellPaddingY
+                guard let photoHeight = currentItem.photoHeight, let height = currentItem.cardHeight else {
+                    return
+                }
                 
                 let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
-                let insetFrame = frame.insetBy(dx: self.cellPaddingX, dy: self.cellPaddingY)
+                let insetFrame = frame.insetBy(dx: self.itemsCalc.itemPaddingX, dy: self.itemsCalc.itemPaddingY)
                 
                 let attributes = PinterestLayoutAttributes(forCellWith: indexPath)
                 attributes.photoHeight = photoHeight
-                attributes.aspectRatio = aspectRatio
                 attributes.frame = insetFrame
                 self.cache.append(attributes)
                 
-                self.contentHeight = max(self.contentHeight, frame.maxY)
                 yOffset[column] = yOffset[column] + height
                 
                 if yOffset[0] == yOffset[1] {
@@ -107,6 +81,8 @@ class PinterestLayout: UICollectionViewLayout {
                     column = (yOffset[0] > yOffset[1]) ? 1 : 0
                 }
             }
+            
+            self.contentHeight = self.itemsCalc.containerHeight
         }
     }
     

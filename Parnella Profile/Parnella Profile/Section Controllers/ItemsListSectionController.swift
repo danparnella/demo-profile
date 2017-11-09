@@ -17,6 +17,7 @@ class ItemsListSectionController: ListBindingSectionController<ItemsData> {
     }()
     
     var adapterData: [Item]?
+    var itemsCalc: ItemsCalc!
     var tempItems = [Item]()
     var collectionViewCell: ItemsContainerCollectionViewCell?
     
@@ -38,10 +39,12 @@ extension ItemsListSectionController: ListBindingSectionControllerDataSource {
             self.adapterData = object.items
         }
         
-        guard let items = self.adapterData else { fatalError() }
+        guard let width = self.collectionContext?.insetContainerSize.width, let items = self.adapterData else { fatalError() }
         self.tempItems = items
+        self.itemsCalc = ItemsCalc(items: items, contentWidth: width - (8 * 2))
+        
         var data: [ListDiffable] = [
-            ContentContainerViewModel(items: items)
+            ContentContainerViewModel(items: items, itemsCalc: self.itemsCalc)
         ]
         
         if let headerTitle = object.headerTitle {
@@ -52,15 +55,13 @@ extension ItemsListSectionController: ListBindingSectionControllerDataSource {
     }
     
     func sectionController(_ sectionController: ListBindingSectionController<ListDiffable>, sizeForViewModel viewModel: Any, at index: Int) -> CGSize {
-        guard let width = self.collectionContext?.insetContainerSize.width, let items = self.adapterData else { fatalError() }
+        guard let width = self.collectionContext?.insetContainerSize.width else { fatalError() }
         
         let height: CGFloat = {
             if let viewModel = viewModel as? ContentHeaderViewModel {
                 return viewModel.kHeaderDefaultHeight
             }
-            
-            let itemsCalc = ItemsCalc(items: items, contentWidth: width - (8 * 2))
-            return itemsCalc.getContainerHeight()
+            return self.itemsCalc.getContainerHeight()
         }()
         
         return CGSize(width: width, height: height)

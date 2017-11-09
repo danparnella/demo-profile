@@ -11,9 +11,11 @@ import IGListKit
 
 final class ContentContainerViewModel: ListDiffable {
     let items: [ListDiffable]
+    let itemsCalc: ItemsCalc
     
-    init(items: [ListDiffable]) {
+    init(items: [ListDiffable], itemsCalc: ItemsCalc) {
         self.items = items
+        self.itemsCalc = itemsCalc
     }
     
     func diffIdentifier() -> NSObjectProtocol {

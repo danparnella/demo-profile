@@ -133,7 +133,7 @@ extension ProfileViewController: UIScrollViewDelegate {
     }
     
     func updateThreshold() {
-        self.dataModel.threshold = self.collectionView.contentSize.height - 1500
+        self.dataModel.threshold = self.collectionView.contentSize.height - 2500
     }
 }
 

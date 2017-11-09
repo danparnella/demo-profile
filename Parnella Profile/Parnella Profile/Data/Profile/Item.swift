@@ -24,6 +24,11 @@ final class Item: ListDiffable {
     
     var skipItem = false
     
+    // Calc Cache
+    var photoHeight: CGFloat?
+    var annotationHeight: CGFloat?
+    var cardHeight: CGFloat?
+    
     init(data: [String: Any]) {
         self.processData(data)
     }

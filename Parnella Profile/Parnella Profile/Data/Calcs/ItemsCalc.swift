@@ -14,6 +14,7 @@ struct ItemsCalc {
     
     let columnWidth: CGFloat
     let itemWidth: CGFloat
+    var containerHeight: CGFloat = 0
     
     let itemPaddingX: CGFloat = 8
     let itemPaddingY: CGFloat = 10
@@ -24,7 +25,7 @@ struct ItemsCalc {
         self.itemWidth = columnWidth - (self.itemPaddingX * 2)
     }
     
-    func getContainerHeight() -> CGFloat {
+    mutating func getContainerHeight() -> CGFloat {
         var containerHeight: CGFloat = 0
         
         var xOffset: [CGFloat] = [0, self.columnWidth]
@@ -45,6 +46,7 @@ struct ItemsCalc {
             }
         }
         
+        self.containerHeight = containerHeight
         return containerHeight
     }
     
@@ -56,8 +58,17 @@ struct ItemsCalc {
     }
     
     func getItemHeight(forItem item: Item) -> CGFloat {
-        let photoHeight = self.getPhotoHeight(forItem: item)
-        let annotationHeight = item.getItemHeight(width: self.itemWidth)
-        return self.itemPaddingY + photoHeight + annotationHeight + self.itemPaddingY
+        if item.cardHeight == nil {
+            let photoHeight = self.getPhotoHeight(forItem: item)
+            let annotationHeight = item.getItemHeight(width: self.itemWidth)
+            item.photoHeight = photoHeight
+            item.annotationHeight = annotationHeight
+            item.cardHeight = self.itemPaddingY + photoHeight + annotationHeight + self.itemPaddingY
+        }
+        
+        if let cardHeight = item.cardHeight {
+            return cardHeight
+        }
+        return 0
     }
 }
