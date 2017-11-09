@@ -32,8 +32,6 @@ class ProfileDetailsCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var relationshipLabel: UILabel!
     @IBOutlet weak var relationshipProfileButton: UIButton!
     
-    @IBOutlet var allStackViews: [UIStackView]!
-    
     weak var delegate: ProfileDetailsCellDelegate?
     var ownProfile = false
     
@@ -60,26 +58,21 @@ extension ProfileDetailsCollectionViewCell {
         
         self.locationStackView.isHidden = !locationPresent
         self.birthdayStackView.isHidden = !birthdayPresent || (!self.ownProfile && !data.isFriend)
+        
+        self.birthdayStackView.spacing = (self.birthdayStackView.isHidden) ? 0 : 5
+        
         self.locationBirthdayStackView.isHidden = (!locationPresent && self.birthdayStackView.isHidden)
         self.relationshipStackView.isHidden = ((self.ownProfile && !relationshipPresent) || (!self.ownProfile && !data.isFriend))
         self.relationshipProfileButton.isHidden = self.relationshipStackView.isHidden
         
         self.detailsStackView.isHidden = (!locationPresent && self.birthdayStackView.isHidden && self.relationshipStackView.isHidden)
         
-        for stackView in self.allStackViews {
-            if stackView.isHidden {
-                stackView.spacing = 0
-            }
-        }
-        
         self.locationLabel.text = data.location
         self.birthdayLabel.text = data.birthday
-        if relationshipPresent {
-            self.relationshipIcon.changeImageColor(to: Colors().red)
-            self.relationshipLabel.text = data.relationshipName
-        } else if data.isFriend {
-            self.relationshipLabel.text = "Send a relationship request to \(data.firstName ?? "them")?"
-        }
+        
+        let relIconColor = (relationshipPresent) ? Colors().red : Colors().grayA7
+        self.relationshipIcon.changeImageColor(to: relIconColor)
+        self.relationshipLabel.text = (relationshipPresent) ? data.relationshipName : "Send a relationship request to \(data.firstName ?? "them")?"
     }
 }
 

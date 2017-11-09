@@ -112,6 +112,7 @@ extension ProfilePhotoCollectionViewCell: ProfileViewControllerDelegate {
         
         if offset <= self.bkgdPhotoActionButtonHeightConstraint.constant {
             self.alpha = 1
+            backgroundPhotoView.photoAttrStackView.alpha = 1
             
             if offset > 0 {
                 var scale = 1 - offset/350
@@ -134,9 +135,13 @@ extension ProfilePhotoCollectionViewCell: ProfileViewControllerDelegate {
             
             let photoViewScrollDistance = self.bkgdPhotoActionButtonHeightConstraint.constant + 25
             if offset >= photoViewScrollDistance {
-                self.alpha = 1 - (offset - photoViewScrollDistance)/30
+                let alphaOffset = (offset - photoViewScrollDistance)/30
+                
+                self.alpha = 1 - alphaOffset
+                backgroundPhotoView.photoAttrStackView.alpha = 1 - alphaOffset
             } else {
                 self.alpha = 1
+                backgroundPhotoView.photoAttrStackView.alpha = 1
             }
         }
     }
