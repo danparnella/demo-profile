@@ -20,13 +20,13 @@ final class ProfileDataModel {
     }
 
     var profileDetails: ProfileDetailsData? {
-        willSet {
-            self.updateDataInSection(.profileDetails, data: newValue)
+        didSet {
+            self.updateDataInSection(.profileDetails, data: self.profileDetails)
         }
     }
     var items: ItemsData? {
-        willSet {
-            self.updateDataInSection(.items, data: newValue)
+        didSet {
+            self.updateDataInSection(.items, data: self.items)
         }
     }
     

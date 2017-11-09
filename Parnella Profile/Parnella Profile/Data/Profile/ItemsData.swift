@@ -26,6 +26,7 @@ final class ItemsData: ListDiffable {
     var items = [Item]()
     var headerTitle: String?
     var offset = 20 * Int(arc4random_uniform(75))
+    var pageNumber = 0
     
     var gettingData = false
     weak var loadDelegate: ItemsInitialDataDelegate?
@@ -39,18 +40,19 @@ final class ItemsData: ListDiffable {
     }
     
     func getRandomItemData(nextPage: Bool = false) {
-        guard offset <= 1491 else { return }
+        guard offset <= 1491, pageNumber <= 5 else { return }
         
         self.gettingData = true
         
         let timeStamp = String(describing: Date().timeIntervalSince1970)
         let stringToConvert = "\(timeStamp)8106d4f20bb85aa99ebf0d8d26721409a7b3fe6d1ef56758b1bca5e8c20487af3e11a458"
-        guard let url = URL(string: "https://gateway.marvel.com/v1/public/characters?orderBy=modified&offset=\(self.offset)&ts=\(timeStamp)&apikey=1ef56758b1bca5e8c20487af3e11a458&hash=\(stringToConvert.apiHash())") else {
+        guard let url = URL(string: "https://gateway.marvel.com/v1/public/characters?offset=\(self.offset)&ts=\(timeStamp)&apikey=1ef56758b1bca5e8c20487af3e11a458&hash=\(stringToConvert.apiHash())") else {
             print("URL broke :(")
             return
         }
         
         self.offset += 20
+        self.pageNumber += 1
         
         let urlSession = URLSession.shared.dataTask(with:url) { (data, response, error) in
             if let data = data {
