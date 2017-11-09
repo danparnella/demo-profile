@@ -12,13 +12,13 @@ import IGListKit
 final class ProfilePhotoLineViewModel: ListDiffable {
     var numberOfFriends: String
     var ownProfile: Bool
-    var numberOfFollowing: String
+    var numberOfComics: String
     var profileImageURLString: String?
     
-    init(friendsCount: Int, ownProfile: Bool, followingCount: Int, profileImageURLString: String?) {
+    init(friendsCount: Int, ownProfile: Bool, comicsCount: Int, profileImageURLString: String?) {
         self.numberOfFriends = String(describing: friendsCount)
         self.ownProfile = ownProfile
-        self.numberOfFollowing = String(describing: followingCount)
+        self.numberOfComics = String(describing: comicsCount)
         self.profileImageURLString = profileImageURLString
     }
     
@@ -30,7 +30,7 @@ final class ProfilePhotoLineViewModel: ListDiffable {
         guard let object = object as? ProfilePhotoLineViewModel else { return false }
         
         if self.numberOfFriends == object.numberOfFriends {
-            if self.numberOfFollowing == object.numberOfFollowing {
+            if self.numberOfComics == object.numberOfComics {
                 return self.profileImageURLString == object.profileImageURLString
             }
         }

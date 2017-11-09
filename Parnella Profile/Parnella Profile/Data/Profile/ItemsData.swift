@@ -25,6 +25,7 @@ final class ItemsData: ListDiffable {
     var source: ItemSource
     var items = [Item]()
     var headerTitle: String?
+    var headerDescription: String?
     var offset = 20 * Int(arc4random_uniform(75))
     var pageNumber = 0
     
@@ -32,10 +33,11 @@ final class ItemsData: ListDiffable {
     weak var loadDelegate: ItemsInitialDataDelegate?
     weak var updateDelegate: ItemsUpdateDataDelegate?
     
-    init(loadDelegate: ItemsInitialDataDelegate, source: ItemSource, headerTitle: String?) {
+    init(loadDelegate: ItemsInitialDataDelegate, source: ItemSource, headerTitle: String?, headerDescription: String?) {
         self.loadDelegate = loadDelegate
         self.source = source
         self.headerTitle = headerTitle
+        self.headerDescription = headerDescription
         self.getRandomItemData()
     }
     

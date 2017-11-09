@@ -19,6 +19,9 @@ final class ProfileBackgroundHeader: UIView, NibReusable {
     @IBOutlet weak var changePhotoView: UIView!
     @IBOutlet weak var changePhotoIcon: UIImageView!
     
+    @IBOutlet weak var photoAttrStackView: UIStackView!
+    @IBOutlet weak var photoAttrNameLabel: UILabel!
+    
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var profileNameLabelTopConstraint: NSLayoutConstraint!
 
@@ -52,6 +55,19 @@ final class ProfileBackgroundHeader: UIView, NibReusable {
             self.changePhotoView.alpha = 1 + offset/75
         } else {
             self.changePhotoView.alpha = 1 - offset/30
+        }
+    }
+    
+    func updatePhotoAttribution(name: String?) {
+        if let attrName = name, !attrName.isEmpty {
+            self.photoAttrNameLabel.text = name
+            UIView.animate(withDuration: 0.25) {
+                self.photoAttrStackView.alpha = 1
+            }
+        } else {
+            UIView.animate(withDuration: 0.25) {
+                self.photoAttrStackView.alpha = 0
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ import Nuke
 protocol ProfilePhotoCellDelegate: class {
     func friendsButtonTapped()
     func followingButtonTapped()
-    func changeBackgroundPhotoTapped()
+    func bkgdPhotoActionButtonTapped()
     func changeProfilePhotoTapped()
 }
 
@@ -22,8 +22,8 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var friendsView: UIView!
     @IBOutlet weak var friendsTallyLabel: UILabel!
     
-    @IBOutlet weak var followingView: UIView!
-    @IBOutlet weak var followingTallyLabel: UILabel!
+    @IBOutlet weak var comicsView: UIView!
+    @IBOutlet weak var comicsTallyLabel: UILabel!
     
     @IBOutlet weak var photoViews: UIView!
     @IBOutlet weak var photoDropShadowView: UIImageView!
@@ -35,9 +35,9 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
     @IBOutlet weak var changePhotoIcon: UIImageView!
     @IBOutlet weak var changeProfilePhotoButton: UIButton!
     
-    @IBOutlet weak var changeBkgdPhotoButton: UIButton!
-    @IBOutlet weak var backgroundPhotoButtonHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var backgroundPhotoButtonVerticalSpacingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bkgdPhotoActionButton: UIButton!
+    @IBOutlet weak var bkgdPhotoActionButtonHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bkgdPhotoActionButtonVerticalSpacingConstraint: NSLayoutConstraint!
     
     weak var delegate: ProfilePhotoCellDelegate?
     var photoViewsYOrigin: CGFloat?
@@ -64,8 +64,8 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
         self.delegate?.followingButtonTapped()
     }
     
-    @IBAction func changeBackgroundPhotoTapped(_ sender: UIButton) {
-        self.delegate?.changeBackgroundPhotoTapped()
+    @IBAction func bkgdPhotoActionButtonTapped(_ sender: UIButton) {
+        self.delegate?.bkgdPhotoActionButtonTapped()
     }
     
     @IBAction func changeProfilePhotoTapped(_ sender: UIButton) {
@@ -77,12 +77,11 @@ class ProfilePhotoCollectionViewCell: UICollectionViewCell, NibReusable {
 extension ProfilePhotoCollectionViewCell {
     func setupCell(data: ProfilePhotoLineViewModel) {
         self.friendsTallyLabel.text = data.numberOfFriends
-        self.followingTallyLabel.text = data.numberOfFollowing
+        self.comicsTallyLabel.text = data.numberOfComics
         self.loadProfileImage(urlString: data.profileImageURLString)
         
         if data.ownProfile {
             self.changePhotoView.isHidden = false
-            self.changeBkgdPhotoButton.isUserInteractionEnabled = true
             self.changeProfilePhotoButton.isUserInteractionEnabled = true
         }
     }
@@ -108,10 +107,10 @@ extension ProfilePhotoCollectionViewCell: ProfileViewControllerDelegate {
         guard let originalYOrigin = self.photoViewsYOrigin else { return }
 
         if backgroundPhotoView.originalNameTopConstraintConstant == nil {
-            backgroundPhotoView.originalNameTopConstraintConstant = self.frame.height - self.backgroundPhotoButtonHeightConstraint.constant + 18
+            backgroundPhotoView.originalNameTopConstraintConstant = self.frame.height - self.bkgdPhotoActionButtonHeightConstraint.constant + 18
         }
         
-        if offset <= self.backgroundPhotoButtonHeightConstraint.constant {
+        if offset <= self.bkgdPhotoActionButtonHeightConstraint.constant {
             self.alpha = 1
             
             if offset > 0 {
@@ -128,12 +127,12 @@ extension ProfilePhotoCollectionViewCell: ProfileViewControllerDelegate {
                 self.photoDropShadowView.alpha = 1
             }
         } else if let originalTopConstraint = backgroundPhotoView.originalNameTopConstraintConstant {
-            var newConstant = originalTopConstraint - (offset - self.backgroundPhotoButtonHeightConstraint.constant)
+            var newConstant = originalTopConstraint - (offset - self.bkgdPhotoActionButtonHeightConstraint.constant)
             newConstant = (newConstant >= -32.5) ? newConstant : -32.5
             backgroundPhotoView.profileNameLabelTopConstraint.constant = newConstant
             backgroundPhotoView.layoutIfNeeded()
             
-            let photoViewScrollDistance = self.backgroundPhotoButtonHeightConstraint.constant + 25
+            let photoViewScrollDistance = self.bkgdPhotoActionButtonHeightConstraint.constant + 25
             if offset >= photoViewScrollDistance {
                 self.alpha = 1 - (offset - photoViewScrollDistance)/30
             } else {

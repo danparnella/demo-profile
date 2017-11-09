@@ -48,7 +48,7 @@ extension ItemsListSectionController: ListBindingSectionControllerDataSource {
         ]
         
         if let headerTitle = object.headerTitle {
-            data.insert(ContentHeaderViewModel(title: headerTitle), at: 0)
+            data.insert(ContentHeaderViewModel(title: headerTitle, description: object.headerDescription), at: 0)
         }
         
         return data
@@ -59,7 +59,7 @@ extension ItemsListSectionController: ListBindingSectionControllerDataSource {
         
         let height: CGFloat = {
             if let viewModel = viewModel as? ContentHeaderViewModel {
-                return viewModel.kHeaderDefaultHeight
+                return viewModel.kHeaderDefaultHeight + viewModel.getDescriptionHeight(width)
             }
             return self.itemsCalc.getContainerHeight()
         }()

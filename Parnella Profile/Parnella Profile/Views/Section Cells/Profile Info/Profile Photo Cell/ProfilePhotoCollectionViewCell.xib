@@ -36,7 +36,7 @@
                                         <rect key="frame" x="0.0" y="12" width="128" height="114.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="QPe-eC-C4g">
-                                                <rect key="frame" x="43" y="60.5" width="43.5" height="43.5"/>
+                                                <rect key="frame" x="42.5" y="60.5" width="43.5" height="43.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="167" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTk-1N-DbV">
                                                         <rect key="frame" x="3" y="0.0" width="37" height="26"/>
@@ -190,13 +190,13 @@
                                     <constraint firstAttribute="bottom" secondItem="Y74-eU-e7c" secondAttribute="bottom" id="r3P-CB-g1d"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnB-wI-dA4">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnB-wI-dA4">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="143"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="143" id="kTv-yE-GJp"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="changeBackgroundPhotoTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="UVc-bT-339"/>
+                                    <action selector="bkgdPhotoActionButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="e7h-P0-wev"/>
                                 </connections>
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfv-ho-Eqf">
@@ -232,14 +232,14 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="512" height="266"/>
             <connections>
-                <outlet property="backgroundPhotoButtonHeightConstraint" destination="kTv-yE-GJp" id="H98-fk-N6R"/>
-                <outlet property="backgroundPhotoButtonVerticalSpacingConstraint" destination="a5b-FD-zyy" id="ZQg-07-SXa"/>
-                <outlet property="changeBkgdPhotoButton" destination="pnB-wI-dA4" id="29i-NV-TiV"/>
+                <outlet property="bkgdPhotoActionButton" destination="pnB-wI-dA4" id="aHP-fw-fw1"/>
+                <outlet property="bkgdPhotoActionButtonHeightConstraint" destination="kTv-yE-GJp" id="dQd-j5-oNQ"/>
+                <outlet property="bkgdPhotoActionButtonVerticalSpacingConstraint" destination="a5b-FD-zyy" id="Ii3-mk-QV0"/>
                 <outlet property="changePhotoIcon" destination="zPf-Jf-gR6" id="XB7-t0-0XS"/>
                 <outlet property="changePhotoView" destination="M10-j5-Y9B" id="nBG-2u-1z8"/>
                 <outlet property="changeProfilePhotoButton" destination="hfv-ho-Eqf" id="GP7-6j-gqx"/>
-                <outlet property="followingTallyLabel" destination="woJ-q9-bdU" id="r3z-eI-Z0M"/>
-                <outlet property="followingView" destination="zRq-HQ-nAa" id="AQz-zH-2I3"/>
+                <outlet property="comicsTallyLabel" destination="woJ-q9-bdU" id="P3x-0t-xSM"/>
+                <outlet property="comicsView" destination="zRq-HQ-nAa" id="vSm-wl-Dwb"/>
                 <outlet property="friendsTallyLabel" destination="oTk-1N-DbV" id="Tvb-J6-fnr"/>
                 <outlet property="friendsView" destination="7Hp-Uh-Kpf" id="KML-w9-1JI"/>
                 <outlet property="imageView" destination="Jeg-xg-SUX" id="owR-Mc-tXD"/>

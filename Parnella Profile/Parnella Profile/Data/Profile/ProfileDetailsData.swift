@@ -17,13 +17,16 @@ protocol ProfileDetailsDataDelegate: class {
 final class ProfileDetailsData: ListDiffable {
     let ownProfile: Bool
     let friendsCount: Int
-    let followingCount: Int
+    let comicsCount: Int
 
     var isFriend = false
     var requestSent = false
     var awaitingResponse = false
     
     var backgroundImageURLString: String?
+    var backgroundImageAttrURLString: String?
+    var backgroundImageAttrName: String?
+    
     var profileImageURLString: String?
     var firstName: String?
     var fullName: String?
@@ -51,7 +54,7 @@ final class ProfileDetailsData: ListDiffable {
         }
         
         self.friendsCount = Int(arc4random_uniform(1001))
-        self.followingCount = Int(arc4random_uniform(301))
+        self.comicsCount = Int(arc4random_uniform(301))
 
         self.inRelationship = randomBool()
         
@@ -71,7 +74,7 @@ final class ProfileDetailsData: ListDiffable {
 // MARK: Data Handling
 extension ProfileDetailsData {
     func getBackgroundPhoto() {
-        guard let url = URL(string: "https://api.unsplash.com/photos/random?client_id=d2a3cc6fe413710d74b49502129e0b2f7423b12f0bc121a38776d14613d2959d") else {
+        guard let url = URL(string: "https://api.unsplash.com/photos/random?orientation=landscape&client_id=d2a3cc6fe413710d74b49502129e0b2f7423b12f0bc121a38776d14613d2959d") else {
             print("URL is broken :(")
             return
         }
@@ -126,11 +129,18 @@ extension ProfileDetailsData {
     }
     
     func processBackgroundImageData(_ data: Any) {
-        if let container = data as? [String: Any],
-            let urls = container["urls"] as? [String: String],
-            let smallSizePhoto = urls["small"]
-        {
-            self.backgroundImageURLString = smallSizePhoto
+        if let container = data as? [String: Any] {
+            if let urls = container["urls"] as? [String: String], let smallSizePhoto = urls["small"] {
+                self.backgroundImageURLString = smallSizePhoto
+            }
+            
+            if let userDetails = container["user"] as? [String: Any] {
+                self.backgroundImageAttrName = userDetails["name"] as? String
+                
+                if let userLinks = userDetails["links"] as? [String: String], let htmlLink = userLinks["html"] {
+                    self.backgroundImageAttrURLString = htmlLink + "?utm_source=parnella_profile&utm_medium=referral&utm_campaign=api-credit"
+                }
+            }
         }
         
         self.delegate?.backgroundImageLoaded(urlString: self.backgroundImageURLString)

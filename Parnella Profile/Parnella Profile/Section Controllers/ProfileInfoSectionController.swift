@@ -12,6 +12,7 @@ import IGListKit
 final class ProfileInfoSectionController: ListBindingSectionController<ProfileDetailsData> {
     var updateData: ProfileDetailsData?
     var backgroundImageHeight: CGFloat = 0
+    var backgroundImageAttrURLString: String?
     
     override init() {
         super.init()
@@ -32,7 +33,7 @@ extension ProfileInfoSectionController: ListBindingSectionControllerDataSource {
             ProfilePhotoLineViewModel(
                 friendsCount: data.friendsCount,
                 ownProfile: data.ownProfile,
-                followingCount: data.followingCount,
+                comicsCount: data.comicsCount,
                 profileImageURLString: data.profileImageURLString
             ),
             ProfileDetailsViewModel(
@@ -101,9 +102,11 @@ extension ProfileInfoSectionController: ListBindingSectionControllerDataSource {
         }
         
         if let cell = cell as? ProfilePhotoCollectionViewCell {
-            cell.backgroundPhotoButtonHeightConstraint.constant = self.backgroundImageHeight
-            cell.backgroundPhotoButtonVerticalSpacingConstraint.constant = -self.backgroundImageHeight * (5/13)
+            cell.bkgdPhotoActionButtonHeightConstraint.constant = self.backgroundImageHeight
+            cell.bkgdPhotoActionButtonVerticalSpacingConstraint.constant = -self.backgroundImageHeight * (5/13)
             cell.layoutIfNeeded()
+            
+            cell.delegate = self
             
             if let viewController = self.viewController as? ProfileViewController {
                 viewController.delegate = cell
@@ -114,4 +117,19 @@ extension ProfileInfoSectionController: ListBindingSectionControllerDataSource {
         
         return cell
     }
+}
+
+// MARK: Delegate
+extension ProfileInfoSectionController: ProfilePhotoCellDelegate {
+    func friendsButtonTapped() {}
+    
+    func followingButtonTapped() {}
+    
+    func bkgdPhotoActionButtonTapped() {
+        if let url = URL(string: self.backgroundImageAttrURLString ?? "") {
+            UIApplication.shared.open(url, options: [:])
+        }
+    }
+    
+    func changeProfilePhotoTapped() {}
 }

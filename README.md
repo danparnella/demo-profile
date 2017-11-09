@@ -12,7 +12,7 @@ and a random starting page of Marvel characters with pagination for more.
 
 If on your own profile, you can unfollow characters and they will be removed.  If on someone else's, you can follow and unfollow from their list of followed characters.
 
-Background images provided by [Unsplash](http://www.unsplash.com).
+Background images provided by [Unsplash](http://www.unsplash.com/?utm_source=parnella_profile&utm_medium=referral&utm_campaign=api-credit).
 Data provided by Marvel. © 2014 [Marvel](http://marvel.com).
 Profile images provided by [UI Faces](http://uifaces.com/).
 

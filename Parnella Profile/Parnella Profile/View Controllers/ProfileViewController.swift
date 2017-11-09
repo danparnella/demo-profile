@@ -32,12 +32,14 @@ final class ProfileViewController: UIViewController {
     let ownProfile = randomBool()
     weak var delegate: ProfileViewControllerDelegate?
     
+    private let refreshControl = UIRefreshControl()
+    var attemptingReload = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.backgroundPhotoView.changePhotoView.isHidden = !self.ownProfile
-        
-        self.dataModel = ProfileDataModel(ownProfile: self.ownProfile)
-        self.dataModel.delegate = self
+        self.setupRefresh()
+        self.loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,6 +64,27 @@ final class ProfileViewController: UIViewController {
 
 // MARK: Initial Setup
 extension ProfileViewController {
+    func setupRefresh() {
+        self.collectionView.refreshControl = self.refreshControl
+        self.refreshControl.tintColor = Colors().white
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to load new profile", attributes: [.font: LatoFont().bold, .foregroundColor: Colors().white])
+        self.refreshControl.addTarget(self, action: #selector(self.reloadData), for: .valueChanged)
+    }
+    
+    func loadData() {
+        if self.attemptingReload {
+            self.dataModel.removeDataInSection(.profileDetails)
+            self.attemptingReload = false
+        }
+        self.dataModel = ProfileDataModel(ownProfile: self.ownProfile)
+        self.dataModel.delegate = self
+    }
+    
+    @objc func reloadData() {
+        self.attemptingReload = true
+        self.refreshControl.endRefreshing()
+    }
+    
     func setupLayouts() {
         let backgroundHeight = self.view.frame.width/2
         self.backgroundPhotoViewHeightConstraint.constant = backgroundHeight
@@ -94,6 +117,10 @@ extension ProfileViewController: ListAdapterDataSource {
         if object is ProfileDetailsData {
             let sectionController = ProfileInfoSectionController()
             sectionController.backgroundImageHeight = self.backgroundPhotoViewHeightConstraint.constant - self.navHeaderHeight()
+            
+            // In case section wasn't created yet when trying to set this previously
+            sectionController.backgroundImageAttrURLString = self.dataModel.profileDetails?.backgroundImageAttrURLString
+            
             return sectionController
         } else if object is ItemsData {
             let sectionController = ItemsListSectionController()
@@ -110,7 +137,7 @@ extension ProfileViewController: ListAdapterDataSource {
 extension ProfileViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let backgroundMinusHeader = self.view.frame.width/2 - self.navHeaderHeight()
-        let offset = self.collectionView.contentOffset.y
+        let offset = scrollView.contentOffset.y
         let framesOffset = offset - backgroundMinusHeader
         
         self.updateFrames(framesOffset)
@@ -135,6 +162,12 @@ extension ProfileViewController: UIScrollViewDelegate {
     func updateThreshold() {
         self.dataModel.threshold = self.collectionView.contentSize.height - 2500
     }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if self.attemptingReload && scrollView.contentOffset.y == 0 {
+            self.loadData()
+        }
+    }
 }
 
 // MARK: Delegate
@@ -150,6 +183,12 @@ extension ProfileViewController: ProfileDataModelDelegate {
     func dataLoaded() {
         DispatchQueue.main.async {
             self.backgroundPhotoView.profileNameLabel.text = self.dataModel.profileDetails?.fullName
+            self.backgroundPhotoView.updatePhotoAttribution(name: self.dataModel.profileDetails?.backgroundImageAttrName)
+            
+            if let profileSectionController = self.adapter.sectionController(forSection: 0) as? ProfileInfoSectionController {
+                profileSectionController.backgroundImageAttrURLString = self.dataModel.profileDetails?.backgroundImageAttrURLString
+            }
+            
             self.updateMainAdapter()
         }
     }
