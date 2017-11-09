@@ -5,7 +5,7 @@ Every time you open the app it's populated with random user data, which includes
 - background and profile photos
 - name, location, birthday, relationship user (or single)
 - whether it's your own profile or someone else's
-- if someone else's, whether you've sent a request, are awaiting a response, have not interacted before or are friends already
+- if someone else's, whether you've sent a request, are awaiting a response, have not interacted before or are friends already<br>
 and a random starting page of Marvel characters with pagination for more.
 
 **Available interactions:**
@@ -19,9 +19,7 @@ and a random starting page of Marvel characters with pagination for more.
     - collection view inside of collection view (needed for pinterest layout) is causing cells not to be reused, causing all to be laid out at once
 - code could use some cleanup
 
-<br>
-<br>
-<br>
+
 Background images provided by [Unsplash](http://www.unsplash.com/?utm_source=parnella_profile&utm_medium=referral&utm_campaign=api-credit).<br>
 Data provided by Marvel. © 2014 [Marvel](http://marvel.com).<br>
 Profile images provided by [UI Faces](http://uifaces.com/).
