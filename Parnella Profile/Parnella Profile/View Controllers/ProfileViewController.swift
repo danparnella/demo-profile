@@ -65,7 +65,7 @@ final class ProfileViewController: UIViewController {
 // MARK: Initial Setup
 extension ProfileViewController {
     func setupRefresh() {
-        self.collectionView.refreshControl = self.refreshControl
+        self.refreshControl.bounds.origin.y -= 20
         self.refreshControl.tintColor = Colors().white
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to load new profile", attributes: [.font: LatoFont().bold, .foregroundColor: Colors().white])
         self.refreshControl.addTarget(self, action: #selector(self.reloadData), for: .valueChanged)
@@ -105,6 +105,8 @@ extension ProfileViewController: ListAdapterDataSource {
     func updateMainAdapter() {
         self.adapter.performUpdates(animated: true) { (finished) in
             self.updateThreshold()
+            self.refreshControl.removeFromSuperview()
+            self.collectionView.insertSubview(self.refreshControl, at: 0)
             self.dataModel.items?.gettingData = false
         }
     }

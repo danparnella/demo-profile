@@ -17,6 +17,7 @@ final class Item: ListDiffable {
     var viewerState: ItemState = .following
     var name: String?
     var description: String?
+    var itemLinkURLString: String?
     var imageURLString: String?
     var aspectRatio: CGFloat = 0
     
@@ -37,6 +38,7 @@ final class Item: ListDiffable {
         self.viewerState = item.viewerState
         self.description = item.description
         self.name = item.name
+        self.itemLinkURLString = item.itemLinkURLString
         self.imageURLString = item.imageURLString
         self.aspectRatio = item.aspectRatio
         self.itemID = item.itemID
@@ -57,6 +59,19 @@ final class Item: ListDiffable {
             path = path.replacingOccurrences(of: "http", with: "https")
             self.imageURLString = path + "/portrait_fantastic." + pathExt
             self.aspectRatio = 2/3
+        }
+        
+        if let urls = data["urls"] as? [[String: String]] {
+            if let wikiURL = urls.filter({ $0["type"] == "wiki" }).first {
+                self.itemLinkURLString = wikiURL["url"]
+            } else if let detailURL = urls.filter({ $0["type"] == "detail" }).first {
+                self.itemLinkURLString = detailURL["url"]
+            } else if let comicURL = urls.filter({ $0["type"] == "comicLink" }).first {
+                self.itemLinkURLString = comicURL["url"]
+            }
+        }
+        if (self.itemLinkURLString ?? "").isEmpty {
+            self.itemLinkURLString = "http://marvel.com"
         }
         
         if (self.description ?? "").isEmpty || (self.imageURLString ?? "").contains("image_not_available") {

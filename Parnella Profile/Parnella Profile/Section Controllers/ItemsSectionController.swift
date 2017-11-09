@@ -45,6 +45,14 @@ extension ItemsSectionController: ListBindingSectionControllerDataSource {
         
         return cell
     }
+    
+    override func didSelectItem(at index: Int) {
+        if let item = object?.items[index] {
+            if let url = URL(string: item.itemLinkURLString ?? "") {
+                UIApplication.shared.open(url, options: [:])
+            }
+        }
+    }
 }
 
 // MARK: Delegate
