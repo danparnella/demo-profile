@@ -29,7 +29,7 @@ final class ProfileViewController: UIViewController {
     }()
     
     var dataModel: ProfileDataModel!
-    let ownProfile = randomBool()
+    var ownProfile = randomBool()
     weak var delegate: ProfileViewControllerDelegate?
     
     private let refreshControl = UIRefreshControl()
@@ -37,7 +37,8 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.backgroundPhotoView.changePhotoView.isHidden = !self.ownProfile
+        self.collectionView.alpha = 0
+        self.backgroundPhotoView.alpha = 0
         self.setupRefresh()
         self.loadData()
     }
@@ -68,21 +69,28 @@ extension ProfileViewController {
         self.refreshControl.bounds.origin.y -= 20
         self.refreshControl.tintColor = Colors().white
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to load new profile", attributes: [.font: LatoFont().bold, .foregroundColor: Colors().white])
-        self.refreshControl.addTarget(self, action: #selector(self.reloadData), for: .valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(self.initiateReload), for: .valueChanged)
     }
     
     func loadData() {
-        if self.attemptingReload {
-            self.dataModel.removeDataInSection(.profileDetails)
-            self.attemptingReload = false
-        }
+        self.ownProfile = randomBool()
+        self.backgroundPhotoView.changePhotoView.isHidden = !self.ownProfile
         self.dataModel = ProfileDataModel(ownProfile: self.ownProfile)
         self.dataModel.delegate = self
     }
     
-    @objc func reloadData() {
+    @objc func initiateReload() {
         self.attemptingReload = true
         self.refreshControl.endRefreshing()
+    }
+    
+    func reloadData() {
+        self.attemptingReload = false
+        self.backgroundPhotoView.fade(.viewOut)
+        self.collectionView.fade(.viewOut, completion: { finished in
+            self.dataModel.removeDataInSection(.profileDetails)
+            self.loadData()
+        })
     }
     
     func setupLayouts() {
@@ -104,6 +112,11 @@ extension ProfileViewController {
 extension ProfileViewController: ListAdapterDataSource {
     func updateMainAdapter() {
         self.adapter.performUpdates(animated: true) { (finished) in
+            if self.dataModel.profileDetails != nil {
+                self.collectionView.fade(.viewIn)
+                self.backgroundPhotoView.fade(.viewIn)
+            }
+            
             self.updateThreshold()
             self.refreshControl.removeFromSuperview()
             self.collectionView.insertSubview(self.refreshControl, at: 0)
@@ -167,7 +180,7 @@ extension ProfileViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if self.attemptingReload && scrollView.contentOffset.y == 0 {
-            self.loadData()
+            self.reloadData()
         }
     }
 }

@@ -90,6 +90,16 @@ extension UIView {
             self.layer.removeAllAnimations()
         }
     }
+    
+    enum FadeDirection {
+        case viewIn, viewOut
+    }
+    
+    func fade(_ direction: FadeDirection, duration: TimeInterval = 0.25, completion: ((Bool) -> Void)? = nil) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = (direction == .viewIn) ? 1 : 0
+        }, completion: completion)
+    }
 }
 
 extension String {

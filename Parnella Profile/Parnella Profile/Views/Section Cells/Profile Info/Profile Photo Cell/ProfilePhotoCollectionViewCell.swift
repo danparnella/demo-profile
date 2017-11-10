@@ -80,10 +80,8 @@ extension ProfilePhotoCollectionViewCell {
         self.comicsTallyLabel.text = data.numberOfComics
         self.loadProfileImage(urlString: data.profileImageURLString)
         
-        if data.ownProfile {
-            self.changePhotoView.isHidden = false
-            self.changeProfilePhotoButton.isUserInteractionEnabled = true
-        }
+        self.changePhotoView.isHidden = !data.ownProfile
+        self.changeProfilePhotoButton.isUserInteractionEnabled = data.ownProfile
     }
     
     func loadProfileImage(urlString: String?) {

@@ -40,14 +40,19 @@ class ProfileFriendButtonCollectionViewCell: UICollectionViewCell, NibReusable {
 extension ProfileFriendButtonCollectionViewCell {
     func setupCell(data: ProfileFriendingViewModel) {
 //        self.addFriendMessageLabel.text = self.addFriendMessageLabel.text?.replacingOccurrences(of: "*blank*", with: data.friendName)
-        if data.requestSent {
-            self.addFriendButton.setTitle("Cancel Request", for: .normal)
-            self.addFriendButton.setTitleColor(Colors().red, for: .normal)
-            self.addFriendButton.borderColor = Colors().red
-            self.addFriendButton.tag = 1
-        } else if data.awaitingResponse {
-            self.addFriendButton.isHidden = true
-            self.respondButtonsStackView.isHidden = false
+        
+        self.addFriendButton.isHidden = data.awaitingResponse
+        self.respondButtonsStackView.isHidden = !data.awaitingResponse
+        
+        if !data.awaitingResponse {
+            let title = (data.requestSent) ? "Cancel Request" : "Add Friend"
+            let color = (data.requestSent) ? Colors().red : Colors().green
+            let tag = (data.requestSent) ? 1 : 0
+            
+            self.addFriendButton.setTitle(title, for: .normal)
+            self.addFriendButton.setTitleColor(color, for: .normal)
+            self.addFriendButton.borderColor = color
+            self.addFriendButton.tag = tag
         }
     }
 }
