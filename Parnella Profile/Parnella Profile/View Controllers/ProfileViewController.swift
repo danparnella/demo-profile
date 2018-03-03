@@ -16,7 +16,6 @@ protocol ProfileViewControllerDelegate: class {
 
 final class ProfileViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var collectionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var backgroundPhotoView: ProfileBackgroundHeader!
     @IBOutlet weak var backgroundPhotoViewHeightConstraint: NSLayoutConstraint!
     
